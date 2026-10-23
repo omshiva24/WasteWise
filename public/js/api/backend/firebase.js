@@ -111,6 +111,7 @@ export async function createFirebaseBackend(config, { emulator } = {}) {
   const withId = (d) => ({ id: d.id, ...d.data() });
 
   let current = null;
+  let signingUp = false;
   let profileUnsub = null;
   let pendingTimer = null;
   const authSubs = new Set();
@@ -139,6 +140,7 @@ export async function createFirebaseBackend(config, { emulator } = {}) {
         // A brand-new profile: wait until the server has saved it, otherwise the first
         // queries can reach the server before the profile exists and be refused.
         if (snap.exists() && snap.metadata.hasPendingWrites && (!current || current.needsProfile)) return;
+        if (!snap.exists() && signingUp) return; // email sign-up creates the profile right away
         if (snap.exists()) {
           current = { uid: fbUser.uid, ...snap.data() };
         } else if (snap.metadata.fromCache) {
@@ -234,13 +236,24 @@ export async function createFirebaseBackend(config, { emulator } = {}) {
         const n = clean(name, LIMITS.name);
         if (n.length < 2) throw new AuthError('Please enter your name', 'name');
         if (String(password || '').length < 8) throw new AuthError('Password must be at least 8 characters', 'weak-password');
+        signingUp = true;
         try {
           const cred = await A.createUserWithEmailAndPassword(auth, clean(email, 120), password);
           await A.updateProfile(cred.user, { displayName: n }).catch(() => {});
         } catch (e) {
+          signingUp = false;
           throw authErr(e);
         }
-        return api.auth.completeProfile({ name: n, requestedRole, company, phone });
+        try {
+          return await api.auth.completeProfile({ name: n, requestedRole, company, phone });
+        } finally {
+          signingUp = false;
+          // If the profile could not be saved, show the profile page so they can try again.
+          if (!current && auth.currentUser) {
+            current = stub(auth.currentUser);
+            emitAuth();
+          }
+        }
       },
       async resetPassword(email) {
         const e = clean(email, 120);
@@ -331,8 +344,17 @@ export async function createFirebaseBackend(config, { emulator } = {}) {
         }
         await A.updateProfile(fb, { displayName: n }).catch(() => {});
         await new Promise((r) => {
-          const off = api.auth.onChange((u) => u && !u.needsProfile && (off(), r()));
-          setTimeout(r, 5000);
+          let off = null;
+          let done = false;
+          const finish = () => {
+            if (done) return;
+            done = true;
+            setTimeout(() => off?.(), 0);
+            r();
+          };
+          off = api.auth.onChange((u) => u && !u.needsProfile && finish());
+          if (done) off();
+          setTimeout(finish, 5000);
         });
         log('user.signup', fb.email || fb.phoneNumber || fb.uid, wanted ? `Requested ${wanted} access` : 'Joined');
         return api.auth.current();

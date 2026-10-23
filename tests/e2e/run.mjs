@@ -82,7 +82,7 @@ async function newPage({ viewport = { width: 390, height: 844 }, theme = 'light'
       route.fulfill({ status: 200, contentType: 'text/javascript', headers: { 'Access-Control-Allow-Origin': '*' }, body });
     });
   }
-  if (!REAL_TILES) await ctx.route(/basemaps\.cartocdn\.com/, (route) => route.fulfill({ status: 200, contentType: 'image/png', headers: { 'Access-Control-Allow-Origin': '*' }, body: TILE }));
+  if (!REAL_TILES) await ctx.route(/tile\.openstreetmap\.org/, (route) => route.fulfill({ status: 200, contentType: 'image/png', headers: { 'Access-Control-Allow-Origin': '*' }, body: TILE }));
   await ctx.route(/nominatim\.openstreetmap\.org/, (route) => {
     const u = new URL(route.request().url());
     const place = { name: 'Central Library', display_name: 'Central Library, Library Road, Kalapet, Puducherry, India', address: { road: 'Library Road', suburb: 'Kalapet', city: 'Puducherry' } };
@@ -283,15 +283,16 @@ try {
   await ven.page.click('.tab:has-text("Pickups")');
   await card.waitFor();
   await card.locator('.swipe').scrollIntoViewIfNeeded();
-  await settle(ven.page, 300);
+  await settle(ven.page, 1200); // let the cards finish animating in
   const knob = card.locator('.swipe .knob');
   const box = await knob.boundingBox();
   const track = await card.locator('.swipe').boundingBox();
   await ven.page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
   await ven.page.mouse.down();
-  for (let x = 0; x <= track.width; x += 40) await ven.page.mouse.move(box.x + box.width / 2 + x, box.y + box.height / 2);
+  for (let x = 0; x <= track.width; x += 20) await ven.page.mouse.move(box.x + box.width / 2 + x, box.y + box.height / 2);
   await ven.page.mouse.up();
-  await ven.page.waitForSelector('.toast:has-text("Accepted")');
+  const toastText = await ven.page.locator('.toast').last().innerText({ timeout: 15000 }).catch(() => '(no message)');
+  assert.match(toastText, /Accepted/, `accepting failed: ${toastText}`);
   await ven.page.click('.tab:has-text("My jobs")');
   await ven.page.locator(`.rcard:has(.code:text-is("${code}"))`).click();
   await ven.page.waitForSelector('a.btn:has-text("Directions")');

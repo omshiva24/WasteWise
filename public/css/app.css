@@ -768,3 +768,5 @@ footer.credit { text-align: center; font-size: 0.76rem; color: var(--mute); marg
   .role-grid.three .role-card .ric { grid-row: span 2; }
   .role-grid.three .role-card .rd { font-size: 0.78rem; }
 }
+
+.dark-tiles .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.86) saturate(0.55); }

@@ -23,6 +23,6 @@ Third-party parts keep their own licences and are not covered by this notice:
   - public/js/vendor/jsQR.js: jsQR by Cosmo Wolfe, Apache License 2.0 (LICENSE-jsQR.txt)
   - public/fonts: Inter and Poppins, SIL Open Font License 1.1 (OFL.txt)
   - public/js/vendor/leaflet: Leaflet 1.9.4, BSD 2-Clause License (leaflet/LICENSE.txt)
-  - Map data (c) OpenStreetMap contributors (ODbL); map tiles (c) CARTO
+  - Map data and tiles (c) OpenStreetMap contributors (ODbL)
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.

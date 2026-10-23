@@ -1,4 +1,4 @@
-// Live maps (Leaflet + OpenStreetMap/CARTO tiles): pins, "you are here", mini maps
+// Live maps (Leaflet + OpenStreetMap tiles): pins, "you are here", mini maps
 // and a full-screen location picker with GPS, search and a draggable map.
 
 import { MAP } from '../config.js';
@@ -68,10 +68,12 @@ export async function createMap(el, { center, zoom = 16, interactive = true, zoo
     tapHold: false,
     worldCopyJump: true,
     zoomSnap: 0.5,
+    maxZoom: MAP.maxZoom,
   });
   map.attributionControl.setPrefix(false);
   if (interactive && zoomControl) L.control.zoom({ position: 'bottomright' }).addTo(map);
-  const tiles = L.tileLayer(resolvedTheme() === 'dark' ? MAP.dark : MAP.light, { attribution: MAP.attribution, subdomains: 'abcd', maxZoom: 20, crossOrigin: true }).addTo(map);
+  el.classList.toggle('dark-tiles', resolvedTheme() === 'dark');
+  const tiles = L.tileLayer(MAP.tiles, { attribution: MAP.attribution, maxZoom: MAP.maxZoom }).addTo(map);
   tiles.on('tileerror', () => el.classList.add('tiles-failed'));
   const layer = L.layerGroup().addTo(map);
   let meLayer = null;

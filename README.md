@@ -59,7 +59,7 @@ Everyone gets live **notifications** (bell + toasts), a **profile** page with li
 
 ## Maps and location
 
-- Live maps with [Leaflet](https://leafletjs.com) and [OpenStreetMap](https://www.openstreetmap.org/copyright) data ([CARTO](https://carto.com/attributions) basemaps; a dark map in dark mode).
+- Live maps with [Leaflet](https://leafletjs.com) and [OpenStreetMap](https://www.openstreetmap.org/copyright) tiles; recoloured for dark mode).
 - Device GPS on phones (Capacitor Geolocation) and in browsers, with accuracy shown; a full-screen picker to drag the pin, search a place or jump to your location.
 - Street addresses from OpenStreetMap Nominatim; one tap opens turn-by-turn directions in Google Maps.
 - Vendors' distance labels update live as they move.
@@ -156,4 +156,4 @@ The specification proposed Ionic + React + Recharts + jsPDF. WasteWise keeps the
 
 ## Credits
 
-Designed and built by **P Om Shiva**. Maps: [Leaflet](https://leafletjs.com) (BSD-2-Clause), map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, basemaps © [CARTO](https://carto.com/attributions), addresses by [Nominatim](https://nominatim.org). Icons: [Lucide](https://lucide.dev) (ISC). QR generation: [Project Nayuki QR Code generator](https://www.nayuki.io/page/qr-code-generator-library) (MIT). QR scanning fallback: [jsQR](https://github.com/cozmo/jsQR) (Apache-2.0). Fonts: Inter and Poppins (SIL OFL 1.1).
+Designed and built by **P Om Shiva**. Maps: [Leaflet](https://leafletjs.com) (BSD-2-Clause), map data and tiles © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, addresses by [Nominatim](https://nominatim.org). Icons: [Lucide](https://lucide.dev) (ISC). QR generation: [Project Nayuki QR Code generator](https://www.nayuki.io/page/qr-code-generator-library) (MIT). QR scanning fallback: [jsQR](https://github.com/cozmo/jsQR) (Apache-2.0). Fonts: Inter and Poppins (SIL OFL 1.1).
