@@ -1,13 +1,23 @@
 // WasteWise configuration.
 //
-// DEMO MODE (default): leave FIREBASE_CONFIG as null. Everything runs on this
-// device with sample data, and tabs on the same browser stay in sync.
-//
-// LIVE MODE: paste your Firebase web app config below (Firebase console ->
-// Project settings -> Your apps -> Web app -> Config). This config is not a
-// secret - security comes from firestore.rules. See SETUP_FIREBASE.md.
+// FIREBASE_CONFIG: your Firebase web app config (Firebase console -> Project
+// settings -> Your apps -> Web app -> Config). It is not a secret - security
+// comes from firestore.rules. See SETUP_FIREBASE.md.
 
 export const FIREBASE_CONFIG = null;
+
+// Push notifications to the Android app need google-services.json in the
+// Android build and the optional Cloud Functions (Blaze plan). Keep false until then.
+export const PUSH_ENABLED = false;
+
+// Map tiles: CARTO basemaps built on OpenStreetMap data (free, attribution required).
+export const MAP = {
+  light: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>',
+  // Where the map opens before we know anyone's location (Puducherry).
+  fallback: { lat: 11.9416, lng: 79.8083, zoom: 12 },
+};
 /* Example:
 export const FIREBASE_CONFIG = {
   apiKey: 'AIza...',
@@ -21,7 +31,7 @@ export const FIREBASE_CONFIG = {
 
 export const APP = {
   name: 'WasteWise',
-  version: '1.0.0',
+  version: '2.0.0',
   author: 'P Om Shiva',
   authorUrl: 'https://github.com/omshiva24',
   repoUrl: 'https://github.com/omshiva24/WasteWise',

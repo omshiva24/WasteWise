@@ -9,6 +9,8 @@ const PORT = Number(process.argv[2] || process.env.PORT || 5173);
 // Same security headers as production (vercel.json), so CSP problems show up locally too.
 const VERCEL = JSON.parse(await readFile(new URL('../vercel.json', import.meta.url), 'utf8'));
 const SECURITY = Object.fromEntries(VERCEL.headers[0].headers.filter((x) => !/Strict-Transport/.test(x.key)).map((x) => [x.key, x.value]));
+// End-to-end tests against the Firebase emulators need to reach them on localhost.
+if (process.env.WW_EMULATOR) SECURITY['Content-Security-Policy'] = SECURITY['Content-Security-Policy'].replace('connect-src', 'connect-src http://127.0.0.1:9099 http://127.0.0.1:8080 ws://127.0.0.1:8080');
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.svg': 'image/svg+xml', '.png': 'image/png', '.woff': 'font/woff', '.txt': 'text/plain; charset=utf-8', '.ico': 'image/x-icon' };
 
 http

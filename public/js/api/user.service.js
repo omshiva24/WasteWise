@@ -6,5 +6,4 @@ export const userService = {
   setRole: (uid, role) => getBackend().users.setRole(uid, role),
   setActive: (uid, active) => getBackend().users.setActive(uid, active),
   decline: (uid) => getBackend().users.decline(uid),
-  resetDemo: () => getBackend().reset(),
 };

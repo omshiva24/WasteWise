@@ -1,5 +1,7 @@
 // Admin dashboard: KPIs, charts, overdue list, vendor leaderboard, pending approvals.
-import { h, svgMarkup } from '../../ui/dom.js';
+import { h, svgMarkup, icon } from '../../ui/dom.js';
+import { toast } from '../../ui/components.js';
+import { APP } from '../../config.js';
 import { ART } from '../../ui/art.js';
 import { kpi, sectionTitle, requestCard, btn, banner, skeletonList } from '../../ui/components.js';
 import { donut, hbars, area, leaderboard, columns } from '../../ui/charts.js';
@@ -8,7 +10,7 @@ import { userService } from '../../api/user.service.js';
 import { summarize, byWasteType, weeklySeries, vendorBoard, zoneBoard, overdueList, monthlySeries } from '../../core/stats.js';
 import { STATUS_META } from '../../core/constants.js';
 import { STATUS_COLOR } from '../../ui/components.js';
-import { fmtKg, fmtHours, greeting } from '../../core/format.js';
+import { fmtKg, fmtHours, greeting, plural } from '../../core/format.js';
 import { pageRoot, lifetime, firstName } from '../common.js';
 
 export default function adminHome({ user, navigate }) {
@@ -34,8 +36,8 @@ export default function adminHome({ user, navigate }) {
       svgMarkup(ART.heroChart, 'hero-art art'),
       h('div', { class: 'eyebrow' }, `${greeting()}, ${firstName(user.name)}`),
       h('h2', `${fmtKg(s.kg)} collected`),
-      h('p', `${s.byStatus.COMPLETED} pickups completed · ${s.completionRate}% completion · avg. ${fmtHours(s.avgCompleteHours)} to handover`),
-      h('div', { class: 'actions' }, btn('Export report', { kind: 'white', iconName: 'file-down', onClick: () => navigate('/reports') }), btn('Audit log', { kind: 'glass', iconName: 'activity', onClick: () => navigate('/admin/logs') })));
+      h('p', s.total ? `${plural(s.byStatus.COMPLETED, 'pickup')} completed · ${s.completionRate}% completion · avg. ${fmtHours(s.avgCompleteHours)} to handover` : 'Your dashboard fills up live as pickups are raised and collected.'),
+      h('div', { class: 'actions' }, btn('Live map', { kind: 'white', iconName: 'map', onClick: () => navigate('/map') }), btn('Export report', { kind: 'glass', iconName: 'file-down', onClick: () => navigate('/reports') })));
 
     const kpis = h('div', { class: 'kpis six' },
       kpi({ iconName: 'clipboard-list', label: 'Total requests', value: s.total, tone: 'violet' }),
@@ -62,7 +64,26 @@ export default function adminHome({ user, navigate }) {
         })))
       : '';
 
-    host.replaceChildren(pageRoot(hero, kpis, pendingHost, h('div', { class: 'grid-2' }, statusCard, trendCard), h('div', { class: 'grid-2' }, typeCard, monthCard), lateSec, h('div', { class: 'grid-2' }, vendors, zones)));
+    const share = async () => {
+      const text = `Join WasteWise to raise and collect waste pickups. Sign in with your mobile number: ${APP.liveUrl}`;
+      try {
+        if (navigator.share) await navigator.share({ title: 'WasteWise', text, url: APP.liveUrl });
+        else {
+          await navigator.clipboard.writeText(text);
+          toast('Invite link copied - paste it in WhatsApp', 'success');
+        }
+      } catch {
+        /* cancelled */
+      }
+    };
+    const step = (n, title, text, action) => h('div', { class: 'gs-step' }, h('span', { class: 'gs-n' }, String(n)), h('div', { class: 'grow' }, h('b', title), h('div', { class: 'muted small' }, text)), action);
+    const start = s.total === 0 ? h('section', { class: 'card stack getting-started' },
+      h('div', { class: 'card-title' }, icon('sparkles', { size: 18 }), 'Get WasteWise running'),
+      step(1, 'Add your bins', 'Pin each bin on the map and print its QR sticker.', btn('Bins', { kind: 'soft', size: 'sm', onClick: () => navigate('/admin/bins') })),
+      step(2, 'Invite your team', 'Share the link - people sign in with their mobile number.', btn('Share', { kind: 'soft', size: 'sm', iconName: 'send', onClick: share })),
+      step(3, 'Approve supervisors & vendors', 'They ask for access when they sign up; you approve them.', btn('Users', { kind: 'soft', size: 'sm', onClick: () => navigate('/admin/users') }))) : '';
+
+    host.replaceChildren(pageRoot(hero, start, kpis, pendingHost, h('div', { class: 'grid-2' }, statusCard, trendCard), h('div', { class: 'grid-2' }, typeCard, monthCard), lateSec, h('div', { class: 'grid-2' }, vendors, zones)));
   }));
 
   return { title: 'Dashboard', sub: 'Admin overview', el: host, destroy: life.destroy };

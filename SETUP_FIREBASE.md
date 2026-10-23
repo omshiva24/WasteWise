@@ -1,57 +1,69 @@
-# Going live with Firebase (shared data across phones)
+# Connecting WasteWise to Firebase
 
-Out of the box WasteWise runs in **demo mode**: realistic sample data stored on the device, so anyone can try every role instantly. To let real supervisors, vendors and admins work together on different phones, connect a free Firebase project. It takes about 10 minutes.
+WasteWise stores real accounts and live data in **Firebase** (Google). One Firebase project serves the website, the Android app and the iPhone web app. Setup takes about 10 minutes and works from a phone browser.
 
 ## 1. Create the project
 
-1. Go to <https://console.firebase.google.com> → **Add project** → name it `wastewise` (Google Analytics is optional).
-2. **Build → Authentication → Get started → Email/Password → Enable**.
-3. **Build → Firestore Database → Create database** → choose a location (e.g. `asia-south1` Mumbai) → start in **production mode**.
-4. **Project settings (gear) → Your apps → Web (`</>`)** → register an app called `WasteWise web`. Copy the `firebaseConfig` object.
+1. Open <https://console.firebase.google.com> and sign in with your Google account.
+2. **Create a project** → name it `WasteWise` → you can turn Google Analytics off → **Create**.
 
-## 2. Paste the config
+## 2. Turn on sign-in methods
 
-Open `public/js/config.js` and replace `null` with your config:
+**Build → Authentication → Get started → Sign-in method**, then enable:
+
+| Method | Notes |
+|---|---|
+| **Phone** | OTP by SMS. Google only sends real SMS on the pay-as-you-go **Blaze** plan (small charge per SMS). On the free plan you can still add *test numbers* under **Phone numbers for testing** (e.g. `+91 9999900001` with code `123456`). |
+| **Email/Password** | Free. Includes "Forgot password" emails. |
+| **Google** | Free. Pick your email as the support email. Works on the website (not inside the Android app). |
+
+Then **Authentication → Settings → Authorized domains → Add domain** → `wastewise-six-indol.vercel.app` (and any custom domain you add later).
+
+## 3. Create the database
+
+**Build → Firestore Database → Create database** → Standard edition → location **asia-south1 (Mumbai)** → **Start in production mode**.
+
+## 4. Publish the security rules
+
+**Firestore Database → Rules** → delete everything in the editor → paste the whole of [`firestore.rules`](firestore.rules) → **Publish**.
+
+These rules are what keep the data safe: they enforce roles, the pickup lifecycle and who can read what. Without them the app shows "Can't reach the WasteWise database".
+
+## 5. Connect the app
+
+**Project settings (gear) → General → Your apps → Web (`</>`)** → nickname `WasteWise` → **Register app**. Copy the `firebaseConfig` values into `public/js/config.js`:
 
 ```js
 export const FIREBASE_CONFIG = {
   apiKey: 'AIza…',
   authDomain: 'wastewise-xxxx.firebaseapp.com',
   projectId: 'wastewise-xxxx',
-  storageBucket: 'wastewise-xxxx.appspot.com',
-  messagingSenderId: '…',
-  appId: '…',
+  storageBucket: 'wastewise-xxxx.firebasestorage.app',
+  messagingSenderId: '1234567890',
+  appId: '1:1234567890:web:abc123',
 };
 ```
 
-The web config is **not a secret** (it ships inside every Firebase web app). Your data is protected by `firestore.rules`.
+This config is **not a secret** - it only identifies the project; security comes from the rules in step 4. Push the change and Vercel redeploys the website; GitHub Actions rebuilds the Android APK.
 
-## 3. Deploy the security rules, indexes and Cloud Functions
+## 6. Become the admin
 
-```bash
-npm install -g firebase-tools
-firebase login
-firebase use --add            # pick your project
-firebase deploy --only firestore:rules,firestore:indexes
-cd functions && npm install && cd ..
-firebase deploy --only functions   # needs the Blaze (pay-as-you-go) plan; the free monthly quota easily covers a campus
-```
+Open the app and sign in **first**, before sharing the link. **The very first account becomes the Admin.** Everyone after that joins as a member and can ask for *Supervisor* or *Vendor* access, which the admin approves in **Users**.
 
-The functions send a notification on every status change and run the **7-day overdue check** every 6 hours. Without them the app still works; you just won't get server-side alerts or push notifications.
+Then, as admin:
 
-## 4. Make yourself admin
+1. **Bins** → add your bins, pin each one on the map (or stand next to it and tap **Use my location**) and print the QR stickers.
+2. **Dashboard → Share** the invite link with your supervisors and vendors.
+3. **Users** → approve them as they sign up.
 
-1. Open the app and **Create an account**.
-2. In the Firebase console → **Firestore → users → your document**, change `role` from `member` to `admin`.
-3. Sign out and back in. You can now approve supervisors and vendors from **Users**, and add bins from **Bins**.
+## Optional extras (Blaze plan)
 
-## 5. Push notifications on phones (optional)
+- **Real SMS for phone OTP** - upgrade to Blaze (set a budget alert, e.g. ₹200).
+- **Push notifications to phones** and the automatic **7-day overdue check** - deploy the Cloud Functions in `functions/`:
+  `npm install -g firebase-tools && firebase login && firebase use <project-id> && (cd functions && npm install) && firebase deploy --only functions`,
+  then add `google-services.json` to the Android build and set `PUSH_ENABLED = true` in `public/js/config.js`.
+  Without them, everything still works: notifications appear in the app's bell, and overdue pickups are highlighted in red.
 
-- **Android:** Project settings → Your apps → **Add app → Android**, package name `com.omshiva.wastewise`. Download `google-services.json` into `android/app/` after running `npx cap add android`.
-- **iOS:** add an iOS app with bundle ID `com.omshiva.wastewise`, upload your APNs key (Project settings → Cloud Messaging) and put `GoogleService-Info.plist` into `ios/App/App/`.
+## Free plan limits (Spark)
 
-Then rebuild the app (`npx cap sync`). The app saves each phone's push token to the user's profile, and the Cloud Functions send to it.
-
-## 6. Redeploy the web app
-
-Commit the updated `public/js/config.js` and push - Vercel redeploys automatically. Or host on Firebase instead: `firebase deploy --only hosting`.
+50,000 document reads and 20,000 writes per day and 1 GiB of storage - plenty for a campus or a city ward.

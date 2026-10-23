@@ -83,7 +83,7 @@ export function toast(message, kind = 'success', ms = 2800) {
 }
 
 // ---------------------------------------------------------------- sheets
-export function sheet({ title, subtitle, content, onClose, label }) {
+export function sheet({ title, subtitle, content, onClose, label, focus = true }) {
   const prevFocus = document.activeElement;
   const back = h('div', { class: 'backdrop' });
   let closed = false;
@@ -107,7 +107,7 @@ export function sheet({ title, subtitle, content, onClose, label }) {
   const body = typeof content === 'function' ? content(close) : content;
   box.append(h('div', { class: 'grab' }), title ? h('h3', title) : null, subtitle ? h('p', { class: 'muted small', style: { marginBottom: '12px' } }, subtitle) : null, body);
   document.body.append(back, box);
-  setTimeout(() => box.querySelector('input, select, textarea, button:not(.grab)')?.focus?.({ preventScroll: true }), 60);
+  if (focus) setTimeout(() => box.querySelector('input, select, textarea, button:not(.grab)')?.focus?.({ preventScroll: true }), 60);
   return { close, el: box };
 }
 
@@ -153,6 +153,16 @@ export function segmented(options, value, onChange) {
   }
   requestAnimationFrame(() => requestAnimationFrame(place));
   addEventListener('resize', place);
+  /** Change the selection from code (does not call onChange). */
+  el.select = (v) => {
+    if (v === value || !options.some((o) => o.value === v)) return;
+    value = v;
+    buttons.forEach((b, i) => {
+      b.classList.toggle('on', options[i].value === v);
+      b.setAttribute('aria-selected', String(options[i].value === v));
+    });
+    place();
+  };
   el.setCounts = (counts) => buttons.forEach((b, i) => (b.querySelector('.count').textContent = counts[options[i].value] != null ? String(counts[options[i].value]) : ''));
   return el;
 }
@@ -220,7 +230,7 @@ export function banner({ tone = 'amber', iconName = 'info', title, text, action 
 }
 
 // ---------------------------------------------------------------- request card
-export function requestCard(r, { onOpen, now = Date.now(), footer, showCreator = false, showVendor = true } = {}) {
+export function requestCard(r, { onOpen, now = Date.now(), footer, showCreator = false, showVendor = true, distance = '' } = {}) {
   const w = WASTE_BY_ID[r.wasteType] || WASTE_BY_ID.mixed;
   const late = isOverdue(r, now);
   const step = STATUS_META[r.status]?.step ?? 0;
@@ -234,7 +244,8 @@ export function requestCard(r, { onOpen, now = Date.now(), footer, showCreator =
       h('div', { class: 'loc ellipsis' }, r.location),
       h('div', { class: 'meta' },
         h('span', { class: 'row', style: { gap: '4px' } }, icon(w.icon, { size: 14 }), w.label),
-        h('span', { class: 'row', style: { gap: '4px' } }, icon('qr-code', { size: 14 }), r.binId),
+        r.binId ? h('span', { class: 'row', style: { gap: '4px' } }, icon('qr-code', { size: 14 }), r.binId) : null,
+        distance ? h('span', { class: 'row dist', style: { gap: '4px' } }, icon('navigation', { size: 14 }), distance) : r.geo ? h('span', { class: 'row', style: { gap: '4px' } }, icon('map-pinned', { size: 14 }), 'Pinned') : null,
         h('span', { class: 'row', style: { gap: '4px' } }, icon('clock', { size: 14 }), timeAgo(r.createdAt, now)),
         showCreator && r.createdByName ? h('span', { class: 'row', style: { gap: '4px' } }, icon('user', { size: 14 }), r.createdByName) : null,
         showVendor && r.vendorName ? h('span', { class: 'row', style: { gap: '4px' } }, icon('truck', { size: 14 }), r.vendorName) : null,
@@ -299,6 +310,7 @@ export function swipeToAccept({ label = 'Swipe to accept pickup', onConfirm }) {
   knob.addEventListener('pointerdown', (e) => {
     if (busy) return;
     dragging = true;
+    el.classList.add('dragging');
     startX = e.clientX - x;
     knob.setPointerCapture(e.pointerId);
     haptic();
@@ -307,6 +319,8 @@ export function swipeToAccept({ label = 'Swipe to accept pickup', onConfirm }) {
   const end = () => {
     if (!dragging) return;
     dragging = false;
+    el.classList.remove('dragging');
+    el.dispatchEvent(new CustomEvent('swipeend', { bubbles: true }));
     if (x > max() * 0.8) confirm().catch(() => {});
     else set(0, true);
   };

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { buildReport } from '../public/js/core/report.js';
-import { buildSeed } from '../public/js/api/backend/seed.js';
+import { sampleRequests } from './fixtures.js';
 import { pdfSafe, textWidth, fitText } from '../public/js/core/pdf.js';
 
 test('pdfSafe maps unicode to printable ASCII', () => {
@@ -18,8 +18,7 @@ test('text measuring and fitting', () => {
 
 test('report builds a valid multi-page PDF with a correct xref table', () => {
   const now = Date.UTC(2026, 9, 23);
-  const seed = buildSeed(now);
-  const doc = buildReport({ requests: Object.values(seed.requests), periodLabel: 'Last 90 days', generatedBy: 'Kavya Raman', now });
+  const doc = buildReport({ requests: sampleRequests(now), periodLabel: 'Last 90 days', generatedBy: 'Kavya Raman', now });
   const s = doc.build();
   assert.ok(s.startsWith('%PDF-1.4'));
   assert.ok(s.trimEnd().endsWith('%%EOF'));

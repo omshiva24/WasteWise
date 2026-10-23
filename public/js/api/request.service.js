@@ -5,6 +5,7 @@ export const requestService = {
   watch: (fn) => getBackend().requests.watch(fn),
   watchPublic: (fn) => getBackend().requests.watchPublic(fn),
   get: (id) => getBackend().requests.get(id),
+  photo: (id) => getBackend().requests.photo(id),
   create: (input) => getBackend().requests.create(input),
   accept: (id) => getBackend().requests.act(id, 'accept'),
   release: (id, note) => getBackend().requests.act(id, 'release', { note }),

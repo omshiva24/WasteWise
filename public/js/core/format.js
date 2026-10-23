@@ -50,3 +50,14 @@ export function greeting(now = new Date()) {
   if (h < 17) return 'Good afternoon';
   return 'Good evening';
 }
+
+/** "+919876543210" -> "+91 98765 43210" (other countries: just tidied). */
+export function fmtPhone(p) {
+  const s = String(p || '').replace(/[^\d+]/g, '');
+  const m = s.match(/^\+91(\d{5})(\d{5})$/);
+  if (m) return `+91 ${m[1]} ${m[2]}`;
+  return String(p || '');
+}
+
+/** plural(1, 'pickup') -> "1 pickup", plural(3, 'pickup') -> "3 pickups" */
+export const plural = (n, word, many = `${word}s`) => `${n} ${n === 1 ? word : many}`;

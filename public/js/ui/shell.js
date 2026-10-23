@@ -13,13 +13,13 @@ export const TABS = {
     { path: '/supervisor', label: 'Home', icon: 'house' },
     { path: '/supervisor/requests', label: 'Requests', icon: 'list' },
     { path: '/supervisor/new', label: 'Raise', icon: 'plus', fab: true },
-    { path: '/reports', label: 'Reports', icon: 'file-text' },
+    { path: '/map', label: 'Map', icon: 'map' },
     { path: '/me', label: 'Me', icon: 'user' },
   ],
   vendor: [
     { path: '/vendor', label: 'Pickups', icon: 'truck' },
+    { path: '/map', label: 'Map', icon: 'map' },
     { path: '/vendor/jobs', label: 'My jobs', icon: 'clipboard-list' },
-    { path: '/member', label: 'Impact', icon: 'chart-pie' },
     { path: '/me', label: 'Me', icon: 'user' },
   ],
   admin: [
@@ -31,15 +31,16 @@ export const TABS = {
   ],
   member: [
     { path: '/member', label: 'Impact', icon: 'chart-pie' },
+    { path: '/map', label: 'Map', icon: 'map' },
     { path: '/notifications', label: 'Alerts', icon: 'bell' },
     { path: '/me', label: 'Me', icon: 'user' },
   ],
 };
 
 const EXTRA_SIDE = {
-  admin: [{ path: '/admin/logs', label: 'Audit log', icon: 'activity' }, { path: '/reports', label: 'Reports', icon: 'file-text' }, { path: '/member', label: 'Impact', icon: 'chart-pie' }],
-  supervisor: [{ path: '/member', label: 'Impact', icon: 'chart-pie' }],
-  vendor: [],
+  admin: [{ path: '/map', label: 'Live map', icon: 'map' }, { path: '/admin/logs', label: 'Audit log', icon: 'activity' }, { path: '/reports', label: 'Reports', icon: 'file-text' }, { path: '/member', label: 'Impact', icon: 'chart-pie' }],
+  supervisor: [{ path: '/reports', label: 'Reports', icon: 'file-text' }, { path: '/member', label: 'Impact', icon: 'chart-pie' }],
+  vendor: [{ path: '/member', label: 'Impact', icon: 'chart-pie' }],
   member: [],
 };
 
@@ -87,7 +88,7 @@ function placePill() {
     b.setAttribute('aria-current', on ? 'page' : 'false');
     if (on && !b.classList.contains('fab')) {
       refs.pill.style.width = `${b.offsetWidth}px`;
-      refs.pill.style.transform = `translateX(${b.offsetLeft - 6}px)`;
+      refs.pill.style.transform = `translateX(${b.offsetLeft}px)`;
       refs.pill.style.opacity = '1';
       shown = true;
     }

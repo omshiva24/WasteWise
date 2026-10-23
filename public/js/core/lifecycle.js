@@ -3,6 +3,7 @@
 // rules (firestore.rules) enforce the same transitions on the server.
 
 import { STATUS, OVERDUE_DAYS, DAY, WASTE_BY_ID, PRIORITIES, LIMITS } from './constants.js';
+import { normGeo } from './geo.js';
 
 export class LifecycleError extends Error {
   constructor(message, code = 'invalid') {
@@ -19,10 +20,12 @@ export function validateNewRequest(input = {}) {
   const errors = {};
   const wasteType = String(input.wasteType || '');
   if (!WASTE_BY_ID[wasteType]) errors.wasteType = 'Pick a waste type';
+  // A registered bin is optional - a pickup can also be raised for any pinned spot.
   const binId = clean(input.binId, LIMITS.binId).toUpperCase();
-  if (!/^[A-Z0-9][A-Z0-9-]{1,23}$/.test(binId)) errors.binId = 'Enter or scan a valid bin ID (e.g. BIN-A01)';
+  if (binId && !/^[A-Z0-9][A-Z0-9-]{1,23}$/.test(binId)) errors.binId = 'Bin ID: letters, numbers and dashes only (e.g. BIN-A01)';
+  const geo = normGeo(input.geo);
   const location = clean(input.location, LIMITS.location);
-  if (location.length < 2) errors.location = 'Where is the bin?';
+  if (location.length < 2) errors.location = geo ? 'Add a short description of the spot' : 'Where is the waste? Use your location or type it';
   const zone = clean(input.zone, LIMITS.location);
   const notes = clean(input.notes, LIMITS.notes);
   const priority = PRIORITIES.includes(input.priority) ? input.priority : 'normal';
@@ -33,7 +36,7 @@ export function validateNewRequest(input = {}) {
   return {
     ok: Object.keys(errors).length === 0,
     errors,
-    value: { wasteType, binId, location, zone, notes, priority, estKg, photo },
+    value: { wasteType, binId, location, zone, notes, priority, estKg, photo, geo },
   };
 }
 
@@ -45,11 +48,13 @@ export function newRequest(value, user, now = Date.now(), extra = {}) {
     status: STATUS.OPEN,
     createdBy: user.uid,
     createdByName: user.name,
+    createdByPhone: user.phone || null,
     createdAt: now,
     updatedAt: now,
     acceptedAt: null,
     vendorId: null,
     vendorName: null,
+    vendorPhone: null,
     completedAt: null,
     weightKg: null,
     rating: null,
@@ -92,6 +97,7 @@ export function transition(req, action, user, payload = {}, now = Date.now()) {
       next.status = STATUS.ACCEPTED;
       next.vendorId = user.uid;
       next.vendorName = user.company || user.name;
+      next.vendorPhone = user.phone || null;
       next.acceptedAt = now;
       next.history.push({ status: STATUS.ACCEPTED, at: now, by: user.uid, byName: next.vendorName, note: note || 'Pickup accepted' });
       break;
@@ -99,6 +105,7 @@ export function transition(req, action, user, payload = {}, now = Date.now()) {
       next.status = STATUS.OPEN;
       next.vendorId = null;
       next.vendorName = null;
+      next.vendorPhone = null;
       next.acceptedAt = null;
       next.history.push({ status: STATUS.OPEN, at: now, by: user.uid, byName: user.company || user.name, note: note || 'Pickup released back to the pool' });
       break;

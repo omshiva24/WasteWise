@@ -27,6 +27,20 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+      - name: Same signing key for every build (kept in a private draft release)
+        # Android only installs an update over the old app when both are signed with the same key.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p ~/.android
+          if gh release download signing-key --repo "$GITHUB_REPOSITORY" --pattern debug.keystore --dir ~/.android; then
+            echo "Using the saved signing key"
+          else
+            keytool -genkeypair -keystore ~/.android/debug.keystore -storepass android -keypass android -alias androiddebugkey \
+              -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=WasteWise, O=P Om Shiva, C=IN"
+            gh release create signing-key --repo "$GITHUB_REPOSITORY" --draft --title "Android signing key (private draft - never publish)" \
+              --notes "Used by the Android workflow so every APK is signed with the same key. Keep this as a draft." ~/.android/debug.keystore
+          fi
       - name: Install Capacitor
         run: npm install --no-audit --no-fund
       - name: Create Android project
@@ -34,7 +48,7 @@ jobs:
       - name: App icon and splash screen
         continue-on-error: true
         run: npx capacitor-assets generate --android --iconBackgroundColor '#064e3b' --splashBackgroundColor '#064e3b'
-      - name: Camera, photo and notification permissions
+      - name: Camera, photo, location and notification permissions
         run: node scripts/native-setup.mjs android
       - name: Copy web app into the native project
         run: npx cap sync android
@@ -59,4 +73,5 @@ jobs:
           make_latest: true
           body: |
             **Install on Android:** download `WasteWise.apk` below on your phone, open it and allow "Install unknown apps" when asked.
+            If an older WasteWise (v1) is installed, uninstall it first - v2 is signed with a new permanent key.
             Built automatically from commit ${{ github.sha }}.

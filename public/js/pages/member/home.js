@@ -1,12 +1,12 @@
 // Community impact dashboard (every role can open it): totals, mix, trend, zones, recent pickups, tips.
 import { h, icon, svgMarkup } from '../../ui/dom.js';
 import { ART } from '../../ui/art.js';
-import { kpi, sectionTitle, skeletonList, btn } from '../../ui/components.js';
+import { kpi, sectionTitle, skeletonList, btn, banner, empty } from '../../ui/components.js';
 import { donut, columns, leaderboard } from '../../ui/charts.js';
 import { requestService } from '../../api/request.service.js';
 import { summarize, byWasteType, monthlySeries, zoneBoard, vendorBoard } from '../../core/stats.js';
 import { WASTE_BY_ID } from '../../core/constants.js';
-import { fmtKg, fmtHours, timeAgo } from '../../core/format.js';
+import { fmtKg, fmtHours, timeAgo, plural } from '../../core/format.js';
 import { countUp } from '../../ui/fx.js';
 import { pageRoot, lifetime } from '../common.js';
 
@@ -32,7 +32,7 @@ export default function memberHome({ user, navigate }) {
       svgMarkup(ART.heroChart, 'hero-art art'),
       h('div', { class: 'eyebrow' }, 'Community impact'),
       h('h2', {}, 'Together we moved ', bigKg),
-      h('p', `${done.length} pickups handed to recyclers · ${s.byStatus.OPEN + s.byStatus.ACCEPTED} in progress right now`),
+      h('p', `${plural(done.length, 'pickup')} handed to recyclers · ${s.byStatus.OPEN + s.byStatus.ACCEPTED} in progress right now`),
       user.role === 'supervisor' ? h('div', { class: 'actions' }, btn('Raise pickup', { kind: 'white', iconName: 'plus', onClick: () => navigate('/supervisor/new') })) : null);
     requestAnimationFrame(() => countUp(bigKg, s.kg, { format: (v) => fmtKg(Math.round(v)) }));
 
@@ -40,7 +40,7 @@ export default function memberHome({ user, navigate }) {
       kpi({ iconName: 'circle-check', label: 'Pickups completed', value: done.length, tone: 'emerald' }),
       kpi({ iconName: 'truck', label: 'Active right now', value: s.byStatus.OPEN + s.byStatus.ACCEPTED, tone: 'sky' }),
       kpi({ iconName: 'timer', label: 'Avg. hours to collect', value: s.avgCompleteHours || 0, tone: 'amber', decimals: 1 }),
-      kpi({ iconName: 'building', label: 'Zones served', value: new Set(done.map((r) => r.zone)).size, tone: 'violet' }));
+      kpi({ iconName: 'building', label: 'Zones served', value: new Set(done.map((r) => r.zone).filter(Boolean)).size, tone: 'violet' }));
 
     const types = byWasteType(done).filter((t) => t.kg > 0);
     const mix = h('section', { class: 'card chart-card' }, h('h3', 'Recycling mix'), h('div', { class: 'sub' }, 'Kg collected by waste type'),
@@ -68,7 +68,11 @@ export default function memberHome({ user, navigate }) {
     };
     showTip();
 
-    host.replaceChildren(pageRoot(hero, kpis, h('div', { class: 'grid-2' }, mix, trend), h('div', { class: 'grid-2' }, zones, recyclers), feed, tipBox));
+    const pending = user.requestedRole ? banner({ tone: 'sky', iconName: 'hourglass', title: `Your ${user.requestedRole} access is waiting for approval`, text: "Your admin will review it soon - you'll get a notification. Meanwhile, explore the community stats." }) : '';
+    const charts = done.length
+      ? [h('div', { class: 'grid-2' }, mix, trend), h('div', { class: 'grid-2' }, zones, recyclers), feed]
+      : [h('section', { class: 'card' }, empty({ artName: 'emptyBox', title: 'No pickups completed yet', text: 'Recycling stats appear here as soon as the first handover happens.', action: btn('Open the map', { kind: 'soft', iconName: 'map', onClick: () => navigate('/map') }) }))];
+    host.replaceChildren(pageRoot(pending, hero, kpis, ...charts, tipBox));
   }));
 
   return { title: 'Impact', sub: 'Live community stats', el: host, destroy: life.destroy };

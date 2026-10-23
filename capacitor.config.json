@@ -4,7 +4,8 @@
   "webDir": "public",
   "backgroundColor": "#064e3b",
   "android": {
-    "allowMixedContent": false
+    "allowMixedContent": false,
+    "adjustMarginsForEdgeToEdge": "auto"
   },
   "ios": {
     "contentInset": "never"
@@ -25,7 +26,11 @@
       "backgroundColor": "#eef4f0"
     },
     "PushNotifications": {
-      "presentationOptions": ["badge", "sound", "alert"]
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
     }
   }
 }

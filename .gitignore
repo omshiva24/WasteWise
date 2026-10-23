@@ -15,3 +15,6 @@ firestore-debug.log
 google-services.json
 GoogleService-Info.plist
 .vercel
+
+# test screenshots (compressed .jpg copies are committed)
+docs/screenshots/*.png

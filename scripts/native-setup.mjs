@@ -1,4 +1,4 @@
-// Adds camera / photo permissions to the generated native projects.
+// Adds camera, photo, location and notification permissions to the generated native projects.
 // Run after `npx cap add android` / `npx cap add ios`:  node scripts/native-setup.mjs [android|ios|all]
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
@@ -14,7 +14,10 @@ function patchAndroid() {
     '<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />',
     '<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />',
     '<uses-permission android:name="android.permission.VIBRATE" />',
+    '<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />',
+    '<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />',
     '<uses-feature android:name="android.hardware.camera" android:required="false" />',
+    '<uses-feature android:name="android.hardware.location.gps" android:required="false" />',
   ].filter((p) => !xml.includes(p.split('"')[1]));
   if (perms.length) xml = xml.replace('</manifest>', `    ${perms.join('\n    ')}\n</manifest>`);
   writeFileSync(f, xml);
@@ -29,6 +32,7 @@ function patchIos() {
     NSCameraUsageDescription: 'WasteWise uses the camera to scan bin QR codes and photograph bins for pickup requests.',
     NSPhotoLibraryUsageDescription: 'WasteWise lets you attach a photo of the bin from your library.',
     NSPhotoLibraryAddUsageDescription: 'WasteWise can save photos you take of bins.',
+    NSLocationWhenInUseUsageDescription: 'WasteWise uses your location to pin pickups on the map and show vendors the nearest pickups.',
   };
   let added = 0;
   for (const [k, v] of Object.entries(keys)) {

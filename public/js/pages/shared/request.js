@@ -11,6 +11,9 @@ import { setTitle } from '../../ui/shell.js';
 import { haptic } from '../../ui/fx.js';
 import { pageRoot, lifetime } from '../common.js';
 import { openHandover } from './handover.js';
+import { miniMap } from '../../ui/map.js';
+import { lastKnown } from '../../ui/geo.js';
+import { distanceKm, fmtDistance } from '../../core/geo.js';
 
 const STEPS = [
   { key: 'OPEN', label: 'Raised', icon: 'clipboard-list', color: '#f59e0b', at: (r) => r.createdAt },
@@ -35,6 +38,51 @@ export default function requestDetail({ params, navigate }) {
   const host = h('div', {}, skeletonList(3, 140));
   const page = { title: 'Request', back: true, el: host, destroy: life.destroy };
   let lastStatus = null;
+  let mapEl = null;
+  let mapKey = '';
+  let photo = null;
+  let photoLoading = false;
+  const photoHost = h('div');
+  const cleanup = () => (life.destroy(), mapEl?.destroy?.());
+  page.destroy = cleanup;
+
+  function locationCard(r, w) {
+    const key = r.geo ? `${r.geo.lat},${r.geo.lng}` : '';
+    if (key !== mapKey) {
+      mapEl?.destroy?.();
+      mapEl = r.geo ? miniMap(r.geo, { color: w.color, iconName: w.icon, height: 210, label: r.location }) : null;
+      mapKey = key;
+    }
+    const me = lastKnown();
+    const d = r.geo && me ? distanceKm(me, r.geo) : null;
+    return h('section', { class: 'card stack-sm' },
+      h('div', { class: 'card-title' }, icon('map-pinned', { size: 18 }), 'Location', d != null ? h('span', { class: 'chip bg-sky', style: { marginLeft: 'auto' } }, icon('navigation', { size: 13 }), `${fmtDistance(d)} away`) : null),
+      h('div', { style: { fontWeight: '700' } }, r.location),
+      mapEl || h('p', { class: 'muted small' }, 'No map pin was added for this request.'));
+  }
+
+  function contactRow(r, u) {
+    const out = [];
+    const tel = (n) => `tel:${String(n).replace(/[^\d+]/g, '')}`;
+    if (r.createdByPhone && ((u.role === 'vendor' && r.vendorId === u.uid) || u.role === 'admin')) out.push(h('a', { class: 'btn ghost block', href: tel(r.createdByPhone) }, icon('phone-call', { size: 18 }), h('span', `Call ${r.createdByName?.split(' ')[0] || 'supervisor'}`)));
+    if (r.vendorPhone && ((u.role === 'supervisor' && r.createdBy === u.uid) || u.role === 'admin')) out.push(h('a', { class: 'btn ghost block', href: tel(r.vendorPhone) }, icon('phone-call', { size: 18 }), h('span', `Call ${r.vendorName || 'vendor'}`)));
+    return out.length ? h('div', { class: 'row' }, out) : null;
+  }
+
+  function loadPhoto(r) {
+    if (r.photo) photo = r.photo;
+    if (photo) {
+      photoHost.replaceChildren(h('img', { src: photo, alt: `Photo of the waste for ${r.code}`, class: 'req-photo' }));
+      return;
+    }
+    if (!r.hasPhoto || photoLoading) return;
+    photoLoading = true;
+    photoHost.replaceChildren(h('div', { class: 'skel', style: { height: '220px' } }));
+    requestService.photo(r.id).then((p) => {
+      photo = p;
+      photoHost.replaceChildren(p ? h('img', { src: p, alt: `Photo of the waste for ${r.code}`, class: 'req-photo' }) : '');
+    }).catch(() => photoHost.replaceChildren());
+  }
 
   function draw(r) {
     const u = state.user;
@@ -55,7 +103,7 @@ export default function requestDetail({ params, navigate }) {
     if (acts.includes('accept')) {
       actions.append(swipeToAccept({ onConfirm: async () => {
         await requestService.accept(r.id).catch((e) => (toast(e.message, 'error'), Promise.reject(e)));
-        toast(`You accepted ${r.code} - head to ${r.location}`, 'success');
+        toast(`You accepted ${r.code} - tap Directions to navigate`, 'success');
       } }));
     }
     if (acts.includes('complete')) actions.append(btn('Confirm handover', { kind: 'primary', size: 'lg', block: true, iconName: 'scale', onClick: () => openHandover(r) }));
@@ -72,7 +120,7 @@ export default function requestDetail({ params, navigate }) {
       h('div', { class: 'detail-head' }, wasteBubble(r.wasteType, 'wbig', 32), h('div', {},
         h('div', { class: 'row wrap', style: { gap: '6px' } }, statusChip(r.status), r.priority === 'urgent' ? chip('Urgent', 'red', 'flame', 'urgent') : null, late ? chip(`Overdue by ${overdueDays(r, now) || 1}d`, 'red', 'triangle-alert', 'overdue') : null),
         h('h2', { style: { fontSize: '1.3rem', marginTop: '6px' } }, r.location),
-        h('div', { class: 'muted small' }, `${w.label} · Bin ${r.binId}${r.zone ? ` · ${r.zone}` : ''}`))),
+        h('div', { class: 'muted small' }, [w.label, r.binId ? `Bin ${r.binId}` : '', r.zone].filter(Boolean).join(' · ')))),
       r.status === 'CANCELLED' ? banner({ tone: 'amber', iconName: 'ban', title: 'This request was cancelled' }) : timeline(r));
 
     const grid = h('div', { class: 'info-grid' },
@@ -85,16 +133,19 @@ export default function requestDetail({ params, navigate }) {
     const extras = h('section', { class: 'card stack' }, grid,
       r.rating ? h('div', { class: 'row' }, h('span', { class: 'muted small' }, 'Rating'), stars(r.rating, null, { mini: true, readonly: true })) : null,
       r.notes ? h('div', { class: 'info' }, h('div', { class: 'k' }, icon('paperclip', { size: 13 }), 'Notes'), h('div', { class: 'v', style: { fontWeight: '500' } }, r.notes)) : null,
-      r.photo ? h('img', { src: r.photo, alt: `Photo of bin ${r.binId}`, style: { borderRadius: '16px', maxHeight: '320px', objectFit: 'cover', width: '100%' } }) : null);
+      photoHost);
+    loadPhoto(r);
 
     const history = h('section', { class: 'card' }, h('h3', { style: { fontSize: '1rem', marginBottom: '12px' } }, 'Activity'), h('div', { class: 'history' }, [...(r.history || [])].reverse().map((ev) => {
       const m = STATUS_META[ev.status] || STATUS_META.OPEN;
       return h('div', { class: 'h' }, h('div', { class: `hd bg-${m.tone}` }, icon(m.icon, { size: 14 })), h('div', {}, h('div', { style: { fontWeight: '700', fontSize: '0.9rem' } }, ev.note), h('div', { class: 'muted small' }, `${ev.byName || ''} · ${fmtDateTime(ev.at)}`)));
     })));
 
-    const bin = h('section', { class: 'card row', style: { gap: '14px' } }, h('div', { style: { width: '84px', height: '84px', background: '#fff', borderRadius: '12px', padding: '4px', flex: 'none' } }, qrSvg(r.binId)), h('div', {}, h('div', { style: { fontWeight: '700' } }, `Bin ${r.binId}`), h('div', { class: 'muted small' }, 'Scan this code on site to confirm you are at the right bin.')));
+    const bin = r.binId ? h('section', { class: 'card row', style: { gap: '14px' } }, h('div', { style: { width: '84px', height: '84px', background: '#fff', borderRadius: '12px', padding: '4px', flex: 'none' } }, qrSvg(r.binId)), h('div', {}, h('div', { style: { fontWeight: '700' } }, `Bin ${r.binId}`), h('div', { class: 'muted small' }, 'Scan this code on site to confirm you are at the right bin.'))) : null;
+    const contact = contactRow(r, u);
+    if (contact) actions.append(contact);
 
-    host.replaceChildren(pageRoot(header, actions.childElementCount ? actions : '', extras, bin, history));
+    host.replaceChildren(pageRoot(header, actions.childElementCount ? actions : '', locationCard(r, w), extras, bin, history));
     if (lastStatus && lastStatus !== r.status) haptic('success');
     lastStatus = r.status;
   }

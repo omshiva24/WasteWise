@@ -1,6 +1,6 @@
 {
   "name": "wastewise",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "WasteWise - smart waste pickup management for supervisors, vendors, admins and members. Web (PWA), Android and iOS from one codebase.",
   "private": true,
   "type": "module",
@@ -17,7 +17,8 @@
     "native:add": "npx cap add android && npx cap add ios",
     "native:sync": "npx cap sync",
     "android": "npx cap open android",
-    "ios": "npx cap open ios"
+    "ios": "npx cap open ios",
+    "test:e2e:emulator": "E2E_BACKEND=emulator firebase emulators:exec --only auth,firestore --project demo-wastewise \"node tests/e2e/run.mjs\""
   },
   "devDependencies": {
     "@capacitor/android": "^7.0.0",
@@ -26,6 +27,7 @@
     "@capacitor/camera": "^7.0.0",
     "@capacitor/cli": "^7.0.0",
     "@capacitor/core": "^7.0.0",
+    "@capacitor/geolocation": "^7.0.0",
     "@capacitor/haptics": "^7.0.0",
     "@capacitor/ios": "^7.0.0",
     "@capacitor/push-notifications": "^7.0.0",

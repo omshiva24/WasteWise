@@ -4,7 +4,7 @@ const PREFS = 'wastewise.prefs';
 
 export const state = {
   user: null,
-  mode: 'demo',
+  mode: 'firebase',
   notifications: [],
   unread: 0,
 };

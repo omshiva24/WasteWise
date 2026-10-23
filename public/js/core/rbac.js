@@ -19,6 +19,7 @@ export const ROUTE_ROLES = {
   '/request': ['admin', 'supervisor', 'vendor'],
   '/notifications': ['admin', 'supervisor', 'vendor', 'member'],
   '/me': ['admin', 'supervisor', 'vendor', 'member'],
+  '/map': ['admin', 'supervisor', 'vendor', 'member'],
 };
 
 export const PUBLIC_ROUTES = ['/welcome', '/login', '/signup'];
@@ -30,6 +31,7 @@ export function can(user, permission) {
 
 export function homeFor(user) {
   if (!user) return '/login';
+  if (user.needsProfile) return '/setup';
   return ROLE_META[user.role]?.home || '/member';
 }
 
@@ -37,7 +39,9 @@ export function homeFor(user) {
 export function guard(user, path) {
   const isPublic = PUBLIC_ROUTES.some((p) => path === p || path.startsWith(p + '/'));
   if (!user) return isPublic ? null : '/login';
-  if (isPublic) return homeFor(user);
+  // Signed in for the first time: finish the profile before anything else.
+  if (user.needsProfile) return path === '/setup' ? null : '/setup';
+  if (isPublic || path === '/setup') return homeFor(user);
   if (user.active === false) return path === '/me' ? null : '/me';
   const prefix = Object.keys(ROUTE_ROLES).find((p) => path === p || path.startsWith(p + '/'));
   if (!prefix) return homeFor(user);

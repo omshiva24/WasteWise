@@ -5,6 +5,7 @@ import { userService } from '../../api/user.service.js';
 import { ROLE_META, ROLES } from '../../core/constants.js';
 import { state } from '../../ui/state.js';
 import { pageRoot } from '../common.js';
+import { fmtPhone } from '../../core/format.js';
 
 export default function adminUsers() {
   let users = [];
@@ -13,7 +14,7 @@ export default function adminUsers() {
   const pendingHost = h('div');
   const listHost = h('div', {}, skeletonList(5, 70));
   const seg = segmented([{ value: 'all', label: 'All' }, ...ROLES.map((r) => ({ value: r, label: ROLE_META[r].label }))], role, (v) => ((role = v), draw()));
-  const search = inputBox({ iconName: 'search', type: 'search', placeholder: 'Search name or email', 'aria-label': 'Search users' });
+  const search = inputBox({ iconName: 'search', type: 'search', placeholder: 'Search name, phone or email', 'aria-label': 'Search users' });
   search.querySelector('input').addEventListener('input', (e) => ((q = e.target.value.toLowerCase()), draw()));
 
   async function load() {
@@ -24,7 +25,7 @@ export default function adminUsers() {
   function roleSheet(u) {
     sheet({
       title: `Change role - ${u.name}`,
-      subtitle: u.email,
+      subtitle: fmtPhone(u.phone) || u.email,
       content: (close) => h('div', { class: 'stack-sm' }, ROLES.map((r) =>
         h('button', { type: 'button', class: `role-card ${u.role === r ? 'picked' : ''}`, style: { gridTemplateColumns: 'auto 1fr', alignItems: 'center', display: 'grid', gap: '12px' }, onclick: async () => {
           try {
@@ -45,7 +46,7 @@ export default function adminUsers() {
       avatar(u.name),
       h('div', { style: { minWidth: '0' } },
         h('div', { class: 'un ellipsis' }, u.name, me ? ' (you)' : ''),
-        h('div', { class: 'ue ellipsis' }, u.company ? `${u.company} · ${u.email}` : u.email),
+        h('div', { class: 'ue ellipsis' }, [u.company, fmtPhone(u.phone), u.email].filter(Boolean).join(' · ')),
         h('div', { class: 'row', style: { gap: '6px', marginTop: '6px' } }, chip(ROLE_META[u.role]?.label || u.role, ROLE_META[u.role]?.tone || 'slate', ROLE_META[u.role]?.icon), u.active === false ? chip('Deactivated', 'red', 'ban') : null)),
       h('div', { class: 'row', style: { gap: '8px' } },
         btn('', { kind: 'ghost', size: 'sm', iconName: 'user-cog', ariaLabel: `Change role for ${u.name}`, onClick: () => roleSheet(u), disabled: me }),
@@ -64,11 +65,11 @@ export default function adminUsers() {
     const pending = users.filter((u) => u.requestedRole);
     pendingHost.replaceChildren(...(pending.length ? [sectionTitle(`Waiting for approval (${pending.length})`), h('div', { class: 'stack-sm' }, pending.map((u) =>
       h('div', { class: 'card', style: { borderColor: 'color-mix(in srgb, var(--sky) 45%, var(--line))' } },
-        h('div', { class: 'row' }, avatar(u.name), h('div', { class: 'grow' }, h('div', { style: { fontWeight: '700' } }, u.name), h('div', { class: 'muted small' }, `${u.email}${u.company ? ` · ${u.company}` : ''}`)), chip(`wants ${u.requestedRole}`, ROLE_META[u.requestedRole]?.tone || 'sky', ROLE_META[u.requestedRole]?.icon)),
+        h('div', { class: 'row' }, avatar(u.name), h('div', { class: 'grow' }, h('div', { style: { fontWeight: '700' } }, u.name), h('div', { class: 'muted small' }, [fmtPhone(u.phone), u.email, u.company].filter(Boolean).join(' · '))), chip(`wants ${u.requestedRole}`, ROLE_META[u.requestedRole]?.tone || 'sky', ROLE_META[u.requestedRole]?.icon)),
         h('div', { class: 'row', style: { marginTop: '12px' } },
           btn('Decline', { kind: 'ghost', block: true, onClick: async () => { await userService.decline(u.uid).catch((e) => toast(e.message, 'error')); toast('Request declined', 'info'); load(); } }),
           btn(`Approve as ${ROLE_META[u.requestedRole]?.label}`, { kind: 'primary', block: true, iconName: 'user-check', onClick: async () => { try { await userService.setRole(u.uid, u.requestedRole); toast(`${u.name} approved`, 'success'); load(); } catch (e) { toast(e.message, 'error'); } } })))))] : []));
-    const list = users.filter((u) => (role === 'all' || u.role === role) && (!q || `${u.name} ${u.email} ${u.company || ''}`.toLowerCase().includes(q)));
+    const list = users.filter((u) => (role === 'all' || u.role === role) && (!q || `${u.name} ${u.email || ''} ${u.phone || ''} ${u.company || ''}`.toLowerCase().includes(q)));
     const counts = { all: users.length };
     for (const r of ROLES) counts[r] = users.filter((u) => u.role === r).length;
     seg.setCounts(counts);
