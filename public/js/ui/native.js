@@ -30,11 +30,19 @@ export function nativeListen(plugin, event, cb) {
   if (!c || !isNative()) return () => {};
   try {
     const p = c.Plugins?.[plugin];
-    const handle = p?.addListener ? p.addListener(event, cb) : c.addListener?.(plugin, event, cb);
-    return () => Promise.resolve(handle).then((hd) => hd?.remove?.());
+    if (p?.addListener) {
+      const handle = p.addListener(event, cb);
+      return () => Promise.resolve(handle).then((hd) => hd?.remove?.());
+    }
+    // Without @capacitor/core the bridge still exposes nativeCallback, which is what core uses for listeners.
+    if (typeof c.nativeCallback === 'function') {
+      const callbackId = c.nativeCallback(plugin, 'addListener', { eventName: event }, (data) => cb(data));
+      return () => nativeCall(plugin, 'removeListener', { eventName: event, callbackId }).catch(() => {});
+    }
   } catch {
-    return () => {};
+    /* not available */
   }
+  return () => {};
 }
 
 export async function initNative({ onBack, theme = 'light' } = {}) {

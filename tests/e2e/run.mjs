@@ -194,6 +194,41 @@ try {
   await settle(desk.page, 2200);
   await shot(desk.page, '18-desktop-admin');
   log('dark mode and desktop layout');
+
+  // ---- native bridge (simulated Capacitor Android runtime)
+  const nat = await newPage();
+  await nat.ctx.addInitScript(() => {
+    const calls = [];
+    const cbs = {};
+    let n = 0;
+    window.__nativeCalls = calls;
+    window.__nativeCallbacks = cbs;
+    window.Capacitor = {
+      isNativePlatform: () => true,
+      getPlatform: () => 'android',
+      nativePromise: (plugin, method, opts) => {
+        calls.push(`${plugin}.${method}`);
+        if (plugin === 'Camera') return Promise.resolve({ dataUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVR42mNk+M9Qz0AEYBxVSF+FAAhKDveksOjmAAAAAElFTkSuQmCC' });
+        return Promise.resolve({});
+      },
+      nativeCallback: (plugin, method, opts, cb) => {
+        calls.push(`${plugin}.${method}:${opts.eventName}`);
+        cbs[`${plugin}.${opts.eventName}`] = cb;
+        return `cb${++n}`;
+      },
+    };
+  });
+  await demoLogin(nat.page, 'supervisor');
+  const calls = await nat.page.evaluate(() => window.__nativeCalls);
+  for (const c of ['SplashScreen.hide', 'StatusBar.setStyle', 'App.addListener:backButton']) assert.ok(calls.includes(c), `native call ${c}`);
+  await nat.page.click('.tab.fab');
+  await nat.page.waitForSelector('.photo-drop');
+  await nat.page.click('.photo-drop');
+  await nat.page.waitForSelector('.photo-drop img');
+  assert.ok((await nat.page.evaluate(() => window.__nativeCalls)).includes('Camera.getPhoto'));
+  await nat.page.evaluate(() => window.__nativeCallbacks['App.backButton']({ canGoBack: true }));
+  await nat.page.waitForFunction(() => location.hash === '#/supervisor');
+  log('native bridge: splash, status bar, camera and back button');
 } catch (e) {
   console.error('E2E FAILED:', e);
   errors.push(String(e.message || e));

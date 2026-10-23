@@ -25,4 +25,6 @@ export const APP = {
   author: 'P Om Shiva',
   authorUrl: 'https://github.com/omshiva24',
   repoUrl: 'https://github.com/omshiva24/WasteWise',
+  liveUrl: 'https://wastewise-six-indol.vercel.app',
+  apkUrl: 'https://github.com/omshiva24/WasteWise/releases/download/android-latest/WasteWise.apk',
 };

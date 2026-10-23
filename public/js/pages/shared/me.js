@@ -72,7 +72,8 @@ export default function me({ navigate }) {
     u.role === 'admin' || u.role === 'supervisor' ? srow('file-text', 'emerald', 'Reports', 'PDF report and CSV export', null, () => navigate('/reports')) : null,
     u.role === 'admin' ? srow('activity', 'slate', 'Audit log', 'Every action, with time and person', null, () => navigate('/admin/logs')) : null,
     u.role !== 'member' ? srow('chart-pie', 'emerald', 'Community impact', 'Live recycling stats', null, () => navigate('/member')) : null,
-    install);
+    install,
+    !isNative() ? h('a', { class: 'srow', href: APP.apkUrl, target: '_blank', rel: 'noopener', style: { color: 'inherit' } }, h('div', { class: 'sic bg-emerald' }, icon('smartphone', { size: 19 })), h('div', { class: 'grow' }, h('div', { class: 'st' }, 'Android app'), h('div', { class: 'sd' }, 'Download the APK and install it on your phone')), icon('download', { size: 18 })) : null);
 
   const modeCard = state.mode === 'demo'
     ? h('section', { class: 'card settings' }, srow('wifi-off', 'amber', 'Demo mode', 'Sample data stored only on this device. Open another tab to act as a second role - it syncs live.'),

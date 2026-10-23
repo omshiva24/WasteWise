@@ -8,7 +8,7 @@ WasteWise connects the people who keep a campus or city ward clean. **Supervisor
 
 One codebase runs as a **website**, an **installable app (PWA)** on any phone, and native **Android** and **iOS** apps (Capacitor).
 
-**Live app:** https://wastewise-omshiva24.vercel.app
+**Live app:** https://wastewise-six-indol.vercel.app
 **Android APK:** [Download the latest build](https://github.com/omshiva24/WasteWise/releases/tag/android-latest)
 **Created by:** **P Om Shiva**, M.Tech CSE (2nd year), Pondicherry University · [GitHub @omshiva24](https://github.com/omshiva24)
 **© 2026 P Om Shiva. All rights reserved.** See [LICENSE](LICENSE).
