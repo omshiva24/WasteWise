@@ -19,7 +19,8 @@ await new Promise((r) => setTimeout(r, 600));
 const browser = await chromium.launch();
 const errors = [];
 let step = 0;
-const log = (m) => console.log(`  ${++step}. ${m}`);
+const CI = !!process.env.GITHUB_ACTIONS;
+const log = (m) => (console.log(`  ${++step}. ${m}`), CI && console.log(`::notice title=E2E step ${step}::${m}`));
 
 async function newPage(viewport = { width: 390, height: 844 }, theme = 'light') {
   const ctx = await browser.newContext({ viewport, deviceScaleFactor: 2, colorScheme: theme, acceptDownloads: true, hasTouch: viewport.width < 800 });
@@ -239,6 +240,7 @@ try {
 
 if (errors.length) {
   console.error(`\n${errors.length} problem(s):\n - ${[...new Set(errors)].join('\n - ')}`);
+  if (CI) [...new Set(errors)].slice(0, 8).forEach((e) => console.log(`::error title=E2E after step ${step}::${String(e).replace(/\s+/g, ' ').slice(0, 900)}`));
   process.exit(1);
 }
 console.log(`\nE2E passed (${step} checks). Screenshots in docs/screenshots/`);

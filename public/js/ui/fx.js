@@ -63,7 +63,10 @@ export function haptic(kind = 'light') {
 export function withTransition(update) {
   if (document.startViewTransition && !reducedMotion()) {
     try {
-      return document.startViewTransition(update).finished.catch(() => {});
+      const vt = document.startViewTransition(update);
+      vt.ready?.catch(() => {});
+      vt.updateCallbackDone?.catch(() => {});
+      return vt.finished.catch(() => {});
     } catch {
       /* fall back */
     }
