@@ -1,9 +1,11 @@
 name: Live site check
 
-# Runs after Vercel finishes a production deployment (and on demand): opens the real
-# website and checks that it starts, Firebase loads and the sign-in screen works.
+# Runs after each push to main (once Vercel has had time to deploy) and on demand:
+# opens the real website and checks that it starts, Firebase loads and sign-in works.
 on:
-  deployment_status:
+  push:
+    branches: [main]
+    paths-ignore: ['**.md', 'docs/**']
   workflow_dispatch:
 
 permissions:
@@ -11,7 +13,6 @@ permissions:
 
 jobs:
   check:
-    if: github.event_name == 'workflow_dispatch' || (github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production')
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -23,6 +24,9 @@ jobs:
         run: |
           npm install -g playwright@1.56.1
           npx -y playwright@1.56.1 install --with-deps chromium
+      - name: Give Vercel time to deploy
+        if: github.event_name == 'push'
+        run: sleep 150
       - name: Check https://wastewise-six-indol.vercel.app
         run: PW_PATH="$(npm root -g)/" node tests/live-check.mjs https://wastewise-six-indol.vercel.app
       - name: Publish screenshots
