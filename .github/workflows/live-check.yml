@@ -1,0 +1,36 @@
+name: Live site check
+
+# Runs after Vercel finishes a production deployment (and on demand): opens the real
+# website and checks that it starts, Firebase loads and the sign-in screen works.
+on:
+  deployment_status:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    if: github.event_name == 'workflow_dispatch' || (github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: |
+          npm install -g playwright@1.56.1
+          npx -y playwright@1.56.1 install --with-deps chromium
+      - name: Check https://wastewise-six-indol.vercel.app
+        run: PW_PATH="$(npm root -g)/" node tests/live-check.mjs https://wastewise-six-indol.vercel.app
+      - name: Publish screenshots
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd docs/live-check && ls *.png >/dev/null 2>&1 || exit 0
+          gh release view live-check --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || gh release create live-check --repo "$GITHUB_REPOSITORY" --prerelease --title "Live site check" --notes "Screenshots from the latest check of the deployed website."
+          gh release upload live-check --repo "$GITHUB_REPOSITORY" --clobber *.png
