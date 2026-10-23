@@ -1,0 +1,7 @@
+<svg viewBox="0 0 120 120" aria-hidden="true">
+    <defs><linearGradient id="wwg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bef264"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+    <linearGradient id="wwl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9f99d"/><stop offset="1" stop-color="#4ade80"/></linearGradient></defs>
+    <circle cx="60" cy="60" r="57" fill="#064e3b"/>
+    <g class="ring"><path d="M65.8 18.4 A42 42 0 0 1 100.8 70.2" fill="none" stroke="url(#wwg)" stroke-width="11" stroke-linecap="round"/><path d="M109.7 71.3 L97.9 78.1 L92.2 67.3 Z" fill="url(#wwg)" stroke="url(#wwg)" stroke-width="2" stroke-linejoin="round"/><path d="M93.1 85.9 A42 42 0 0 1 30.8 90.2" fill="none" stroke="url(#wwg)" stroke-width="11" stroke-linecap="round"/><path d="M25.3 97.4 L25.4 83.8 L37.6 84.2 Z" fill="url(#wwg)" stroke="url(#wwg)" stroke-width="2" stroke-linejoin="round"/><path d="M21.1 75.7 A42 42 0 0 1 48.4 19.6" fill="none" stroke="url(#wwg)" stroke-width="11" stroke-linecap="round"/><path d="M45.0 11.3 L56.7 18.1 L50.3 28.5 Z" fill="url(#wwg)" stroke="url(#wwg)" stroke-width="2" stroke-linejoin="round"/></g>
+    <g class="leaf"><path d="M60 37c15 6 19 24 4 42-14-8-18-27-4-42z" fill="url(#wwl)"/><path d="M61 44c2 10 2 21 3 33" stroke="#166534" stroke-width="2.4" fill="none" stroke-linecap="round"/></g>
+  </svg>

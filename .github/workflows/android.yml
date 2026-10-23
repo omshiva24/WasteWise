@@ -1,0 +1,62 @@
+name: Android APK
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['**.md', 'docs/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  apk:
+    name: Build installable APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Install Capacitor
+        run: npm install --no-audit --no-fund
+      - name: Create Android project
+        run: npx cap add android
+      - name: App icon and splash screen
+        continue-on-error: true
+        run: npx capacitor-assets generate --android --iconBackgroundColor '#064e3b' --splashBackgroundColor '#064e3b'
+      - name: Camera, photo and notification permissions
+        run: node scripts/native-setup.mjs android
+      - name: Copy web app into the native project
+        run: npx cap sync android
+      - name: Build debug APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon --stacktrace
+      - name: Collect APK
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk WasteWise.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: WasteWise-android
+          path: WasteWise.apk
+      - name: Publish to the "android-latest" release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: android-latest
+          name: WasteWise for Android (latest build)
+          files: WasteWise.apk
+          make_latest: true
+          body: |
+            **Install on Android:** download `WasteWise.apk` below on your phone, open it and allow "Install unknown apps" when asked.
+            Built automatically from commit ${{ github.sha }}.

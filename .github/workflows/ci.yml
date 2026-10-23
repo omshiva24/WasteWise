@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Unit + end-to-end tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Unit tests (lifecycle, roles, stats, demo backend, PDF)
+        run: node --test tests/*.test.js
+      - name: Syntax check (web app + Cloud Functions)
+        run: |
+          for f in $(find public/js functions scripts -name '*.js' -o -name '*.mjs' | grep -v vendor); do node --check "$f"; done
+      - name: Install Playwright
+        run: |
+          npm install -g playwright@1
+          npx -y playwright@1 install --with-deps chromium
+      - name: End-to-end tests in Chromium
+        run: PW_PATH="$(npm root -g)/" node tests/e2e/run.mjs
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-screenshots
+          path: docs/screenshots/
+          retention-days: 7

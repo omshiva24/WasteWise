@@ -1,0 +1,22 @@
+{
+  "name": "WasteWise - smart waste pickups",
+  "short_name": "WasteWise",
+  "description": "Raise, accept and track waste pickups. Supervisors, vendors, admins and members in one app.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#064e3b",
+  "theme_color": "#059669",
+  "categories": ["utilities", "productivity", "business"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Raise a pickup", "url": "./#/supervisor/new", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Open pickups", "url": "./#/vendor", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

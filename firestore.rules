@@ -1,0 +1,108 @@
+rules_version = '2';
+
+// WasteWise Firestore security rules.
+// Roles live in users/{uid}.role and can only be changed by an admin.
+// The request lifecycle (OPEN -> ACCEPTED -> COMPLETED, or OPEN -> CANCELLED)
+// is enforced here as well as in the app (public/js/core/lifecycle.js).
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function profile() { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data; }
+    function hasProfile() { return signedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)); }
+    function role() { return hasProfile() && profile().active == true ? profile().role : 'none'; }
+    function isAdmin() { return role() == 'admin'; }
+    function isSupervisor() { return role() == 'supervisor'; }
+    function isVendor() { return role() == 'vendor'; }
+    function changed() { return request.resource.data.diff(resource.data).affectedKeys(); }
+    function nowMs() { return request.time.toMillis(); }
+    function recent(t) { return t is number && t > nowMs() - 600000 && t < nowMs() + 600000; }
+    function str(v, max) { return v is string && v.size() <= max; }
+    function wasteType(v) { return v in ['plastic', 'organic', 'paper', 'glass', 'metal', 'ewaste', 'hazardous', 'mixed']; }
+
+    // ---------------------------------------------------------------- users
+    match /users/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+      // Everyone signs up as a member; supervisor / vendor access is only *requested*.
+      allow create: if signedIn() && request.auth.uid == uid
+        && request.resource.data.role == 'member'
+        && request.resource.data.active == true
+        && (request.resource.data.requestedRole == null || request.resource.data.requestedRole in ['supervisor', 'vendor'])
+        && str(request.resource.data.name, 60);
+      allow update: if isAdmin()
+        || (request.auth.uid == uid && !changed().hasAny(['role', 'active', 'requestedRole', 'email', 'createdAt']));
+      allow delete: if isAdmin();
+    }
+
+    // ---------------------------------------------------------------- waste requests
+    match /requests/{id} {
+      allow read: if hasProfile();
+
+      allow create: if isSupervisor()
+        && request.resource.data.status == 'OPEN'
+        && request.resource.data.createdBy == request.auth.uid
+        && wasteType(request.resource.data.wasteType)
+        && str(request.resource.data.binId, 24)
+        && str(request.resource.data.location, 80)
+        && str(request.resource.data.notes, 280)
+        && (request.resource.data.photo == null || str(request.resource.data.photo, 500000))
+        && request.resource.data.vendorId == null
+        && request.resource.data.weightKg == null
+        && recent(request.resource.data.createdAt);
+
+      allow update: if
+        // vendor accepts an open request (a transaction prevents double-accepts)
+        (isVendor() && resource.data.status == 'OPEN' && request.resource.data.status == 'ACCEPTED'
+          && request.resource.data.vendorId == request.auth.uid
+          && recent(request.resource.data.acceptedAt)
+          && changed().hasOnly(['status', 'vendorId', 'vendorName', 'acceptedAt', 'history', 'updatedAt']))
+        // vendor releases a pickup they accepted
+        || (isVendor() && resource.data.status == 'ACCEPTED' && resource.data.vendorId == request.auth.uid
+          && request.resource.data.status == 'OPEN' && request.resource.data.vendorId == null
+          && changed().hasOnly(['status', 'vendorId', 'vendorName', 'acceptedAt', 'history', 'updatedAt']))
+        // supervisor confirms handover of their own request
+        || (isSupervisor() && resource.data.createdBy == request.auth.uid
+          && resource.data.status == 'ACCEPTED' && request.resource.data.status == 'COMPLETED'
+          && request.resource.data.weightKg is number && request.resource.data.weightKg > 0 && request.resource.data.weightKg <= 50000
+          && (request.resource.data.rating == null || (request.resource.data.rating is int && request.resource.data.rating >= 1 && request.resource.data.rating <= 5))
+          && recent(request.resource.data.completedAt)
+          && changed().hasOnly(['status', 'weightKg', 'rating', 'completedAt', 'overdue', 'history', 'updatedAt']))
+        // supervisor cancels their own open request
+        || (isSupervisor() && resource.data.createdBy == request.auth.uid
+          && resource.data.status == 'OPEN' && request.resource.data.status == 'CANCELLED'
+          && changed().hasOnly(['status', 'overdue', 'history', 'updatedAt']))
+        || isAdmin();
+
+      allow delete: if isAdmin();
+    }
+
+    // Request code counter (WR-1001, WR-1002 ...): may only go up by one.
+    match /meta/counters {
+      allow read: if hasProfile();
+      allow create: if (isSupervisor() || isAdmin()) && request.resource.data.requests == 1002;
+      allow update: if (isSupervisor() || isAdmin()) && request.resource.data.requests == resource.data.requests + 1;
+    }
+
+    // ---------------------------------------------------------------- bins
+    match /bins/{binId} {
+      allow read: if hasProfile();
+      allow write: if isAdmin();
+    }
+
+    // ---------------------------------------------------------------- audit log (append-only)
+    match /logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if hasProfile() && request.resource.data.actor == request.auth.uid && recent(request.resource.data.at);
+      allow update, delete: if false;
+    }
+
+    // ---------------------------------------------------------------- notifications
+    // Written by Cloud Functions (admin SDK bypasses rules) or by admins.
+    match /notifications/{nid} {
+      allow read: if signedIn() && resource.data.to == request.auth.uid;
+      allow update: if signedIn() && resource.data.to == request.auth.uid && changed().hasOnly(['read']);
+      allow create: if isAdmin();
+      allow delete: if false;
+    }
+  }
+}

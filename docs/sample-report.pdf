@@ -1,0 +1,396 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 6787 >>
+stream
+0.02 0.31 0.23 rg 0 713.89 595.28 128 re f
+0.02 0.59 0.41 rg 0 713.89 595.28 8 re f
+0.02 0.37 0.27 rg 595.28 791.89 m 595.28 830.55 563.94 861.89 525.28 861.89 c 486.62 861.89 455.28 830.55 455.28 791.89 c 455.28 753.23 486.62 721.89 525.28 721.89 c 563.94 721.89 595.28 753.23 595.28 791.89 c f
+0.02 0.47 0.34 rg 603.28 741.89 m 603.28 762.88 586.27 779.89 565.28 779.89 c 544.29 779.89 527.28 762.88 527.28 741.89 c 527.28 720.9 544.29 703.89 565.28 703.89 c 586.27 703.89 603.28 720.9 603.28 741.89 c f
+BT /F2 26 Tf 1 1 1 rg 40 791.09 Td (WasteWise) Tj ET
+BT /F1 14 Tf 0.65 0.95 0.82 rg 40 766.69 Td (Waste Collection Report) Tj ET
+BT /F1 10 Tf 0.82 0.98 0.9 rg 40 745.89 Td (Last 30 days  -  All zones) Tj ET
+BT /F1 9 Tf 0.82 0.98 0.9 rg 390.19 746.69 Td (Generated 23 Oct 2026 by Kavya Raman) Tj ET
+0.97 0.98 0.99 rg 0.89 0.91 0.94 RG 1 w 40 631.89 163.76 60 re B
+0.06 0.09 0.16 rg 40 631.89 4 60 re f
+BT /F1 9 Tf 0.39 0.45 0.55 rg 54 672.69 Td (Requests raised) Tj ET
+BT /F2 18 Tf 0.06 0.09 0.16 rg 54 649.49 Td (20) Tj ET
+0.97 0.98 0.99 rg 0.89 0.91 0.94 RG 1 w 215.76 631.89 163.76 60 re B
+0.02 0.59 0.41 rg 215.76 631.89 4 60 re f
+BT /F1 9 Tf 0.39 0.45 0.55 rg 229.76 672.69 Td (Completed) Tj ET
+BT /F2 18 Tf 0.06 0.09 0.16 rg 229.76 649.49 Td (8) Tj ET
+0.97 0.98 0.99 rg 0.89 0.91 0.94 RG 1 w 391.52 631.89 163.76 60 re B
+0.02 0.59 0.41 rg 391.52 631.89 4 60 re f
+BT /F1 9 Tf 0.39 0.45 0.55 rg 405.52 672.69 Td (Waste collected) Tj ET
+BT /F2 18 Tf 0.06 0.09 0.16 rg 405.52 649.49 Td (582.3 kg) Tj ET
+0.97 0.98 0.99 rg 0.89 0.91 0.94 RG 1 w 40 561.89 163.76 60 re B
+0.05 0.65 0.91 rg 40 561.89 4 60 re f
+BT /F1 9 Tf 0.39 0.45 0.55 rg 54 602.69 Td (Completion rate) Tj ET
+BT /F2 18 Tf 0.06 0.09 0.16 rg 54 579.49 Td (40%) Tj ET
+0.97 0.98 0.99 rg 0.89 0.91 0.94 RG 1 w 215.76 561.89 163.76 60 re B
+0.94 0.27 0.27 rg 215.76 561.89 4 60 re f
+BT /F1 9 Tf 0.39 0.45 0.55 rg 229.76 602.69 Td (Overdue \(>7 days\)) Tj ET
+BT /F2 18 Tf 0.06 0.09 0.16 rg 229.76 579.49 Td (6) Tj ET
+0.97 0.98 0.99 rg 0.89 0.91 0.94 RG 1 w 391.52 561.89 163.76 60 re B
+0.96 0.62 0.04 rg 391.52 561.89 4 60 re f
+BT /F1 9 Tf 0.39 0.45 0.55 rg 405.52 602.69 Td (Avg. pickup time) Tj ET
+BT /F2 18 Tf 0.06 0.09 0.16 rg 405.52 579.49 Td (32.6 h) Tj ET
+BT /F2 13 Tf 0.06 0.09 0.16 rg 40 531.49 Td (Waste collected by type) Tj ET
+0.02 0.59 0.41 rg 40 520.89 28 3 re f
+BT /F1 10 Tf 0.06 0.09 0.16 rg 40 501.89 Td (Plastic) Tj ET
+0.95 0.96 0.98 rg 130 497.89 315.28 14 re f
+0.23 0.51 0.96 rg 130 497.89 40.7 14 re f
+BT /F1 9 Tf 0.39 0.45 0.55 rg 491.75 502.69 Td (51.2 kg  \(5 req.\)) Tj ET
+BT /F1 10 Tf 0.06 0.09 0.16 rg 40 479.89 Td (Organic) Tj ET
+0.95 0.96 0.98 rg 130 475.89 315.28 14 re f
+0.13 0.77 0.37 rg 130 475.89 315.28 14 re f
+BT /F1 9 Tf 0.39 0.45 0.55 rg 486.75 480.69 Td (396.6 kg  \(5 req.\)) Tj ET
+BT /F1 10 Tf 0.06 0.09 0.16 rg 40 457.89 Td (Paper) Tj ET
+0.95 0.96 0.98 rg 130 453.89 315.28 14 re f
+0.96 0.62 0.04 rg 130 453.89 48.17 14 re f
+BT /F1 9 Tf 0.39 0.45 0.55 rg 491.75 458.69 Td (60.6 kg  \(4 req.\)) Tj ET
+BT /F1 10 Tf 0.06 0.09 0.16 rg 40 435.89 Td (Glass) Tj ET
+0.95 0.96 0.98 rg 130 431.89 315.28 14 re f
+BT /F1 9 Tf 0.39 0.45 0.55 rg 504.26 436.69 Td (0 kg  \(1 req.\)) Tj ET
+BT /F1 10 Tf 0.06 0.09 0.16 rg 40 413.89 Td (Metal) Tj ET
+0.95 0.96 0.98 rg 130 409.89 315.28 14 re f
+BT /F1 9 Tf 0.39 0.45 0.55 rg 504.26 414.69 Td (0 kg  \(1 req.\)) Tj ET
+BT /F1 10 Tf 0.06 0.09 0.16 rg 40 391.89 Td (E-waste) Tj ET
+0.95 0.96 0.98 rg 130 387.89 315.28 14 re f
+0.55 0.36 0.96 rg 130 387.89 58.75 14 re f
+BT /F1 9 Tf 0.39 0.45 0.55 rg 491.75 392.69 Td (73.9 kg  \(3 req.\)) Tj ET
+BT /F1 10 Tf 0.06 0.09 0.16 rg 40 369.89 Td (Hazardous) Tj ET
+0.95 0.96 0.98 rg 130 365.89 315.28 14 re f
+BT /F1 9 Tf 0.39 0.45 0.55 rg 504.26 370.69 Td (0 kg  \(1 req.\)) Tj ET
+BT /F2 13 Tf 0.06 0.09 0.16 rg 40 337.49 Td (Monthly trend \(kg collected\)) Tj ET
+0.02 0.59 0.41 rg 40 326.89 28 3 re f
+0.89 0.91 0.94 RG 1 w 40 207.89 m 555.28 207.89 l S
+0.43 0.91 0.72 rg 58.89 207.89 48.09 0 re f
+BT /F1 8 Tf 0.39 0.45 0.55 rg 80.72 214.49 Td (0) Tj ET
+BT /F1 9 Tf 0.06 0.09 0.16 rg 74.44 195.69 Td (May) Tj ET
+0.43 0.91 0.72 rg 144.77 207.89 48.09 0 re f
+BT /F1 8 Tf 0.39 0.45 0.55 rg 166.6 214.49 Td (0) Tj ET
+BT /F1 9 Tf 0.06 0.09 0.16 rg 161.57 195.69 Td (Jun) Tj ET
+0.43 0.91 0.72 rg 230.65 207.89 48.09 0 re f
+BT /F1 8 Tf 0.39 0.45 0.55 rg 252.48 214.49 Td (0) Tj ET
+BT /F1 9 Tf 0.06 0.09 0.16 rg 248.95 195.69 Td (Jul) Tj ET
+0.43 0.91 0.72 rg 316.53 207.89 48.09 0 re f
+BT /F1 8 Tf 0.39 0.45 0.55 rg 338.36 214.49 Td (0) Tj ET
+BT /F1 9 Tf 0.06 0.09 0.16 rg 332.57 195.69 Td (Aug) Tj ET
+0.43 0.91 0.72 rg 402.41 207.89 48.09 0 re f
+BT /F1 8 Tf 0.39 0.45 0.55 rg 424.24 214.49 Td (0) Tj ET
+BT /F1 9 Tf 0.06 0.09 0.16 rg 417.2 195.69 Td (Sept) Tj ET
+0.02 0.59 0.41 rg 488.29 207.89 48.09 94 re f
+BT /F1 8 Tf 0.39 0.45 0.55 rg 502.33 308.49 Td (582.3) Tj ET
+BT /F1 9 Tf 0.06 0.09 0.16 rg 505.34 195.69 Td (Oct) Tj ET
+BT /F2 13 Tf 0.06 0.09 0.16 rg 40 167.49 Td (Vendor performance) Tj ET
+0.02 0.59 0.41 rg 40 156.89 28 3 re f
+0.93 0.99 0.96 rg 40 129.89 515.28 18 re f
+BT /F2 8 Tf 0.02 0.31 0.23 rg 46 136.49 Td (Vendor) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 232.66 136.49 Td (Completed) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 304.99 136.49 Td (Active) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 366.43 136.49 Td (Kg collected) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 442.99 136.49 Td (Avg. time) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 524.11 136.49 Td (Rating) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 118.09 Td (EcoHaul Services) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 269.27 118.09 Td (4) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 324.27 118.09 Td (1) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 392.73 118.09 Td (361.3) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 455.37 118.09 Td (41.8 h) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 532.46 118.09 Td (4 / 5) Tj ET
+0.98 0.98 0.98 rg 40 93.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 100.09 Td (GreenCycle Recyclers) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 269.27 100.09 Td (2) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 324.27 100.09 Td (4) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 392.73 100.09 Td (147.1) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 460.1 100.09 Td (9.5 h) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 525.37 100.09 Td (3.5 / 5) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 82.09 Td (CleanCity Waste Co.) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 269.27 82.09 Td (2) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 324.27 82.09 Td (2) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 397.46 82.09 Td (73.9) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 455.37 82.09 Td (37.2 h) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 525.37 82.09 Td (4.5 / 5) Tj ET
+0.89 0.91 0.94 RG 1 w 40 34 m 555.28 34 l S
+BT /F1 8 Tf 0.39 0.45 0.55 rg 40 21.6 Td (WasteWise - smart waste pickups) Tj ET
+BT /F1 8 Tf 0.39 0.45 0.55 rg 529.93 21.6 Td (Page 1) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 14565 >>
+stream
+0.02 0.31 0.23 rg 0 813.89 595.28 28 re f
+BT /F2 9 Tf 1 1 1 rg 40 825.69 Td (WasteWise report) Tj ET
+BT /F1 9 Tf 0.65 0.95 0.82 rg 504.25 825.69 Td (Last 30 days) Tj ET
+BT /F2 13 Tf 0.06 0.09 0.16 rg 40 785.49 Td (Overdue requests \(open more than 7 days\)) Tj ET
+0.02 0.59 0.41 rg 40 774.89 28 3 re f
+0.93 0.99 0.96 rg 40 747.89 515.28 18 re f
+BT /F2 8 Tf 0.02 0.31 0.23 rg 46 754.49 Td (Code) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 116 754.49 Td (Raised) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 196 754.49 Td (Type) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 266 754.49 Td (Location) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 416 754.49 Td (Status) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 513.87 754.49 Td (Days late) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 736.09 Td (WR-1057) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 116 736.09 Td (10 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 196 736.09 Td (Paper) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 266 736.09 Td (Admin Building) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 416 736.09 Td (Accepted) Tj ET
+BT /F1 8.5 Tf 0.94 0.27 0.27 rg 544.27 736.09 Td (6) Tj ET
+0.98 0.98 0.98 rg 40 711.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 718.09 Td (WR-1058) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 116 718.09 Td (12 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 196 718.09 Td (Plastic) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 266 718.09 Td (Sports Complex) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 416 718.09 Td (Open) Tj ET
+BT /F1 8.5 Tf 0.94 0.27 0.27 rg 544.27 718.09 Td (4) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 700.09 Td (WR-1059) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 116 700.09 Td (13 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 196 700.09 Td (Plastic) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 266 700.09 Td (Hostel Block B) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 416 700.09 Td (Accepted) Tj ET
+BT /F1 8.5 Tf 0.94 0.27 0.27 rg 544.27 700.09 Td (3) Tj ET
+0.98 0.98 0.98 rg 40 675.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 682.09 Td (WR-1060) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 116 682.09 Td (13 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 196 682.09 Td (E-waste) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 266 682.09 Td (Swimming Pool) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 416 682.09 Td (Open) Tj ET
+BT /F1 8.5 Tf 0.94 0.27 0.27 rg 544.27 682.09 Td (3) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 664.09 Td (WR-1061) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 116 664.09 Td (14 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 196 664.09 Td (Metal) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 266 664.09 Td (Sports Complex) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 416 664.09 Td (Accepted) Tj ET
+BT /F1 8.5 Tf 0.94 0.27 0.27 rg 544.27 664.09 Td (2) Tj ET
+0.98 0.98 0.98 rg 40 639.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 646.09 Td (WR-1062) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 116 646.09 Td (14 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 196 646.09 Td (Organic) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 266 646.09 Td (Central Canteen) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 416 646.09 Td (Open) Tj ET
+BT /F1 8.5 Tf 0.94 0.27 0.27 rg 544.27 646.09 Td (1) Tj ET
+BT /F2 13 Tf 0.06 0.09 0.16 rg 40 615.49 Td (All requests \(20\)) Tj ET
+0.02 0.59 0.41 rg 40 604.89 28 3 re f
+0.93 0.99 0.96 rg 40 577.89 515.28 18 re f
+BT /F2 8 Tf 0.02 0.31 0.23 rg 46 584.49 Td (Code) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 104 584.49 Td (Raised) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 170 584.49 Td (Type) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 226 584.49 Td (Bin) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 278 584.49 Td (Location) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 384 584.49 Td (Status) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 446 584.49 Td (Vendor) Tj ET
+BT /F2 8 Tf 0.02 0.31 0.23 rg 538.34 584.49 Td (Kg) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 566.09 Td (WR-1072) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 566.09 Td (23 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 566.09 Td (Organic) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 566.09 Td (BIN-H03) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 566.09 Td (Hostel Mess) Tj ET
+BT /F1 8.5 Tf 0.02 0.59 0.41 rg 384 566.09 Td (Completed) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 566.09 Td (GreenCycle Rec...) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 532.46 566.09 Td (86.5) Tj ET
+0.98 0.98 0.98 rg 40 541.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 548.09 Td (WR-1071) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 548.09 Td (23 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 548.09 Td (Plastic) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 548.09 Td (BIN-S01) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 548.09 Td (Sports Complex) Tj ET
+BT /F1 8.5 Tf 0.96 0.62 0.04 rg 384 548.09 Td (Open) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 548.09 Td (-) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 546.17 548.09 Td (-) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 530.09 Td (WR-1070) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 530.09 Td (23 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 530.09 Td (Paper) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 530.09 Td (BIN-M01) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 530.09 Td (Admin Building) Tj ET
+BT /F1 8.5 Tf 0.96 0.62 0.04 rg 384 530.09 Td (Open) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 530.09 Td (-) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 546.17 530.09 Td (-) Tj ET
+0.98 0.98 0.98 rg 40 505.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 512.09 Td (WR-1069) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 512.09 Td (22 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 512.09 Td (Glass) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 512.09 Td (BIN-C03) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 512.09 Td (Shopping Complex) Tj ET
+BT /F1 8.5 Tf 0.05 0.65 0.91 rg 384 512.09 Td (Accepted) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 512.09 Td (GreenCycle Rec...) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 546.17 512.09 Td (-) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 494.09 Td (WR-1068) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 494.09 Td (22 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 494.09 Td (Hazardous) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 494.09 Td (BIN-A03) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 494.09 Td (Science Complex - Lab...) Tj ET
+BT /F1 8.5 Tf 0.05 0.65 0.91 rg 384 494.09 Td (Accepted) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 494.09 Td (CleanCity Waste...) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 546.17 494.09 Td (-) Tj ET
+0.98 0.98 0.98 rg 40 469.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 476.09 Td (WR-1067) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 476.09 Td (21 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 476.09 Td (Organic) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 476.09 Td (BIN-C03) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 476.09 Td (Shopping Complex) Tj ET
+BT /F1 8.5 Tf 0.02 0.59 0.41 rg 384 476.09 Td (Completed) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 476.09 Td (EcoHaul Services) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 532.46 476.09 Td (78.7) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 458.09 Td (WR-1066) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 458.09 Td (20 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 458.09 Td (Paper) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 458.09 Td (BIN-M01) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 458.09 Td (Admin Building) Tj ET
+BT /F1 8.5 Tf 0.05 0.65 0.91 rg 384 458.09 Td (Accepted) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 458.09 Td (GreenCycle Rec...) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 546.17 458.09 Td (-) Tj ET
+0.98 0.98 0.98 rg 40 433.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 440.09 Td (WR-1065) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 440.09 Td (19 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 440.09 Td (Plastic) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 440.09 Td (BIN-H02) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 440.09 Td (Hostel Block B) Tj ET
+BT /F1 8.5 Tf 0.05 0.65 0.91 rg 384 440.09 Td (Accepted) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 440.09 Td (EcoHaul Services) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 546.17 440.09 Td (-) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 422.09 Td (WR-1064) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 422.09 Td (18 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 422.09 Td (Organic) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 422.09 Td (BIN-A02) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 422.09 Td (Library Block - Reading...) Tj ET
+BT /F1 8.5 Tf 0.02 0.59 0.41 rg 384 422.09 Td (Completed) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 422.09 Td (EcoHaul Services) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 527.73 422.09 Td (111.4) Tj ET
+0.98 0.98 0.98 rg 40 397.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 404.09 Td (WR-1063) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 404.09 Td (16 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 404.09 Td (Paper) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 404.09 Td (BIN-M01) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 404.09 Td (Admin Building) Tj ET
+BT /F1 8.5 Tf 0.02 0.59 0.41 rg 384 404.09 Td (Completed) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 404.09 Td (GreenCycle Rec...) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 532.46 404.09 Td (60.6) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 386.09 Td (WR-1062) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 386.09 Td (14 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 386.09 Td (Organic) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 386.09 Td (BIN-C01) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 386.09 Td (Central Canteen) Tj ET
+BT /F1 8.5 Tf 0.96 0.62 0.04 rg 384 386.09 Td (Open) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 386.09 Td (-) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 546.17 386.09 Td (-) Tj ET
+0.98 0.98 0.98 rg 40 361.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 368.09 Td (WR-1061) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 368.09 Td (14 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 368.09 Td (Metal) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 368.09 Td (BIN-S01) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 368.09 Td (Sports Complex) Tj ET
+BT /F1 8.5 Tf 0.05 0.65 0.91 rg 384 368.09 Td (Accepted) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 368.09 Td (CleanCity Waste...) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 546.17 368.09 Td (-) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 350.09 Td (WR-1060) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 350.09 Td (13 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 350.09 Td (E-waste) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 350.09 Td (BIN-S02) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 350.09 Td (Swimming Pool) Tj ET
+BT /F1 8.5 Tf 0.96 0.62 0.04 rg 384 350.09 Td (Open) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 350.09 Td (-) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 546.17 350.09 Td (-) Tj ET
+0.98 0.98 0.98 rg 40 325.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 332.09 Td (WR-1059) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 332.09 Td (13 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 332.09 Td (Plastic) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 332.09 Td (BIN-H02) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 332.09 Td (Hostel Block B) Tj ET
+BT /F1 8.5 Tf 0.05 0.65 0.91 rg 384 332.09 Td (Accepted) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 332.09 Td (GreenCycle Rec...) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 546.17 332.09 Td (-) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 314.09 Td (WR-1058) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 314.09 Td (12 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 314.09 Td (Plastic) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 314.09 Td (BIN-S01) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 314.09 Td (Sports Complex) Tj ET
+BT /F1 8.5 Tf 0.96 0.62 0.04 rg 384 314.09 Td (Open) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 314.09 Td (-) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 546.17 314.09 Td (-) Tj ET
+0.98 0.98 0.98 rg 40 289.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 296.09 Td (WR-1057) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 296.09 Td (10 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 296.09 Td (Paper) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 296.09 Td (BIN-M01) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 296.09 Td (Admin Building) Tj ET
+BT /F1 8.5 Tf 0.05 0.65 0.91 rg 384 296.09 Td (Accepted) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 296.09 Td (GreenCycle Rec...) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 546.17 296.09 Td (-) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 278.09 Td (WR-1056) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 278.09 Td (10 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 278.09 Td (E-waste) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 278.09 Td (BIN-A04) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 278.09 Td (Computer Centre) Tj ET
+BT /F1 8.5 Tf 0.02 0.59 0.41 rg 384 278.09 Td (Completed) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 278.09 Td (CleanCity Waste...) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 532.46 278.09 Td (35.5) Tj ET
+0.98 0.98 0.98 rg 40 253.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 260.09 Td (WR-1055) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 260.09 Td (08 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 260.09 Td (Organic) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 260.09 Td (BIN-C03) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 260.09 Td (Shopping Complex) Tj ET
+BT /F1 8.5 Tf 0.02 0.59 0.41 rg 384 260.09 Td (Completed) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 260.09 Td (EcoHaul Services) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 534.82 260.09 Td (120) Tj ET
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 242.09 Td (WR-1054) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 242.09 Td (04 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 242.09 Td (Plastic) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 242.09 Td (BIN-A01) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 242.09 Td (Library Block - Entrance) Tj ET
+BT /F1 8.5 Tf 0.02 0.59 0.41 rg 384 242.09 Td (Completed) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 242.09 Td (EcoHaul Services) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 532.46 242.09 Td (51.2) Tj ET
+0.98 0.98 0.98 rg 40 217.89 515.28 18 re f
+BT /F2 8.5 Tf 0.06 0.09 0.16 rg 46 224.09 Td (WR-1053) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 104 224.09 Td (02 Oct 2026) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 170 224.09 Td (E-waste) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 226 224.09 Td (BIN-A04) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 278 224.09 Td (Computer Centre) Tj ET
+BT /F1 8.5 Tf 0.02 0.59 0.41 rg 384 224.09 Td (Completed) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 446 224.09 Td (CleanCity Waste...) Tj ET
+BT /F1 8.5 Tf 0.06 0.09 0.16 rg 532.46 224.09 Td (38.4) Tj ET
+0.89 0.91 0.94 RG 1 w 40 34 m 555.28 34 l S
+BT /F1 8 Tf 0.39 0.45 0.55 rg 40 21.6 Td (WasteWise - smart waste pickups) Tj ET
+BT /F1 8 Tf 0.39 0.45 0.55 rg 529.93 21.6 Td (Page 2) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Title (WasteWise report - Last 30 days) /Author (Kavya Raman) /Producer (WasteWise) >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000127 00000 n 
+0000000224 00000 n 
+0000000326 00000 n 
+0000007165 00000 n 
+0000007307 00000 n 
+0000021925 00000 n 
+0000022067 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R /Info 9 0 R >>
+startxref
+22173
+%%EOF

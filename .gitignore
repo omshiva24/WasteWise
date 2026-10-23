@@ -1,0 +1,17 @@
+node_modules/
+functions/node_modules/
+android/
+ios/
+build/
+*.apk
+*.aab
+*.ipa
+.DS_Store
+.env
+.env.*
+.firebase/
+firebase-debug.log
+firestore-debug.log
+google-services.json
+GoogleService-Info.plist
+.vercel
