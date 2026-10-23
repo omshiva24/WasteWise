@@ -82,6 +82,30 @@ export async function createFirebaseBackend(config, { emulator } = {}) {
       fs = F.getFirestore(app);
     }
   }
+  /** onSnapshot that re-subscribes after transient errors (e.g. right after a role change). */
+  const listen = (target, next, label) => {
+    let unsub = null;
+    let stopped = false;
+    let tries = 0;
+    let timer = null;
+    const start = () => {
+      unsub = F.onSnapshot(target, (snap) => {
+        tries = 0;
+        next(snap);
+      }, (e) => {
+        console.warn(`[WasteWise] ${label} listener`, e?.code, e?.message);
+        if (stopped || tries >= 6) return;
+        tries += 1;
+        timer = setTimeout(() => !stopped && start(), 700 * tries);
+      });
+    };
+    start();
+    return () => {
+      stopped = true;
+      clearTimeout(timer);
+      unsub?.();
+    };
+  };
   const col = (name) => F.collection(fs, name);
   const ref = (name, id) => F.doc(fs, name, id);
   const withId = (d) => ({ id: d.id, ...d.data() });
@@ -112,6 +136,9 @@ export async function createFirebaseBackend(config, { emulator } = {}) {
       { includeMetadataChanges: true },
       (snap) => {
         clearTimeout(pendingTimer);
+        // A brand-new profile: wait until the server has saved it, otherwise the first
+        // queries can reach the server before the profile exists and be refused.
+        if (snap.exists() && snap.metadata.hasPendingWrites && (!current || current.needsProfile)) return;
         if (snap.exists()) {
           current = { uid: fbUser.uid, ...snap.data() };
         } else if (snap.metadata.fromCache) {
@@ -383,7 +410,6 @@ export async function createFirebaseBackend(config, { emulator } = {}) {
           return () => {};
         }
         const sorted = (xs) => xs.sort((a, b) => b.createdAt - a.createdAt);
-        const err = (e) => console.warn('[WasteWise] requests listener', e?.code, e?.message);
         if (u.role === 'vendor') {
           let open = [];
           let mine = [];
@@ -391,8 +417,8 @@ export async function createFirebaseBackend(config, { emulator } = {}) {
             const m = new Map([...open, ...mine].map((r) => [r.id, r]));
             fn(sorted([...m.values()]));
           };
-          const a = F.onSnapshot(F.query(col('requests'), F.where('status', '==', STATUS.OPEN)), (s) => ((open = s.docs.map(withId)), push()), err);
-          const b = F.onSnapshot(F.query(col('requests'), F.where('vendorId', '==', u.uid)), (s) => ((mine = s.docs.map(withId)), push()), err);
+          const a = listen(F.query(col('requests'), F.where('status', '==', STATUS.OPEN)), (s) => ((open = s.docs.map(withId)), push()), 'open requests');
+          const b = listen(F.query(col('requests'), F.where('vendorId', '==', u.uid)), (s) => ((mine = s.docs.map(withId)), push()), 'my jobs');
           return () => (a(), b());
         }
         // Single-field queries only, so no composite indexes need to be created.
@@ -402,14 +428,14 @@ export async function createFirebaseBackend(config, { emulator } = {}) {
             : u.role === 'supervisor'
               ? F.query(col('requests'), F.where('createdBy', '==', u.uid))
               : F.query(col('requests'), F.where('status', '==', STATUS.COMPLETED), F.limit(3000));
-        return F.onSnapshot(q, (s) => fn(sorted(s.docs.map(withId))), err);
+        return listen(q, (s) => fn(sorted(s.docs.map(withId))), 'requests');
       },
       watchPublic(fn) {
         const q = F.query(col('requests'), F.where('status', 'in', [STATUS.OPEN, STATUS.ACCEPTED, STATUS.COMPLETED]), F.limit(3000));
-        return F.onSnapshot(q, (s) => fn(s.docs.map((d) => {
+        return listen(q, (s) => fn(s.docs.map((d) => {
           const { notes, createdByPhone, vendorPhone, ...r } = withId(d);
           return r;
-        })), (e) => console.warn('[WasteWise] public listener', e?.code));
+        })), 'public stats');
       },
       async get(id) {
         me();
@@ -482,7 +508,7 @@ export async function createFirebaseBackend(config, { emulator } = {}) {
           fn([]);
           return () => {};
         }
-        return F.onSnapshot(col('bins'), (s) => fn(s.docs.map(withId).sort((a, b) => a.id.localeCompare(b.id))), (e) => console.warn('[WasteWise] bins listener', e?.code));
+        return listen(col('bins'), (s) => fn(s.docs.map(withId).sort((a, b) => a.id.localeCompare(b.id))), 'bins');
       },
       async save(bin) {
         requireRole('admin');
@@ -522,7 +548,7 @@ export async function createFirebaseBackend(config, { emulator } = {}) {
           return () => {};
         }
         const q = F.query(col('notifications'), F.where('to', '==', current.uid), F.limit(300));
-        return F.onSnapshot(q, (s) => fn(s.docs.map(withId).sort((a, b) => b.at - a.at).slice(0, 80)), (e) => console.warn('[WasteWise] notifications listener', e?.code));
+        return listen(q, (s) => fn(s.docs.map(withId).sort((a, b) => b.at - a.at).slice(0, 80)), 'notifications');
       },
       async markRead(id) {
         await F.updateDoc(ref('notifications', id), { read: true }).catch(() => {});

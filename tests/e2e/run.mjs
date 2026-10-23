@@ -68,6 +68,7 @@ await new Promise((r) => setTimeout(r, 700));
 
 const browser = await chromium.launch();
 const errors = [];
+const warnings = [];
 let step = 0;
 const log = (m) => (console.log(`  ${++step}. ${m}`), CI && console.log(`::notice title=E2E step ${step}::${m}`));
 const HOME = { lat: 12.0236, lng: 79.8566 };
@@ -90,7 +91,12 @@ async function newPage({ viewport = { width: 390, height: 844 }, theme = 'light'
   });
   const page = await ctx.newPage();
   page.on('pageerror', (e) => errors.push(`pageerror: ${e.message}`));
-  page.on('console', (m) => m.type() === 'error' && !/favicon|ERR_FILE_NOT_FOUND|ERR_NAME_NOT_RESOLVED|ERR_TUNNEL|ERR_CONNECTION/.test(m.text()) && errors.push(`console: ${m.text()}`));
+  // 400s are expected: wrong OTP / password are rejected by the auth server.
+  page.on('console', (m) => {
+    const t = m.text();
+    if (m.type() === 'error' && !/favicon|ERR_FILE_NOT_FOUND|ERR_NAME_NOT_RESOLVED|ERR_TUNNEL|ERR_CONNECTION|status of 400/.test(t)) errors.push(`console: ${t}`);
+    if (t.includes('[WasteWise]')) warnings.push(t.slice(0, 300));
+  });
   return { ctx, page };
 }
 const settle = (page, ms = 900) => page.waitForTimeout(ms);
@@ -365,6 +371,10 @@ try {
   server.kill();
 }
 
+if (warnings.length) {
+  console.log(`\nApp warnings:\n - ${[...new Set(warnings)].slice(0, 20).join('\n - ')}`);
+  if (CI && errors.length) [...new Set(warnings)].slice(0, 6).forEach((w) => console.log(`::warning title=App warning::${w.replace(/\s+/g, ' ')}`));
+}
 if (errors.length) {
   console.error(`\n${errors.length} problem(s):\n - ${[...new Set(errors)].join('\n - ')}`);
   if (CI) [...new Set(errors)].slice(0, 8).forEach((e) => console.log(`::error title=E2E after step ${step}::${String(e).replace(/\s+/g, ' ').slice(0, 900)}`));
