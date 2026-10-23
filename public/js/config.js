@@ -4,7 +4,14 @@
 // settings -> Your apps -> Web app -> Config). It is not a secret - security
 // comes from firestore.rules. See SETUP_FIREBASE.md.
 
-export const FIREBASE_CONFIG = null;
+export const FIREBASE_CONFIG = {
+  apiKey: 'AIzaSyCScr9alQruZD9_roDUXWPmeEzPb5dOSrg',
+  authDomain: 'wastewise-e0db9.firebaseapp.com',
+  projectId: 'wastewise-e0db9',
+  storageBucket: 'wastewise-e0db9.firebasestorage.app',
+  messagingSenderId: '165947995066',
+  appId: '1:165947995066:web:9d00204b39419f794ce383',
+};
 
 // Push notifications to the Android app need google-services.json in the
 // Android build and the optional Cloud Functions (Blaze plan). Keep false until then.
