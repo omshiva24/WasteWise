@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Request lifecycle: OPEN -> ACCEPTED -> COMPLETED (or OPEN -> CANCELLED).
 // Pure functions, shared by every backend and by the tests. The Firestore
 // rules (firestore.rules) enforce the same transitions on the server.

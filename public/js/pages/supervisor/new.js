@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Supervisor: raise a waste pickup request (GPS location + map pin, optional bin QR, type, photo, priority).
 import { h, icon } from '../../ui/dom.js';
 import { btn, field, inputBox, selectBox, setBusy, successOverlay, toast } from '../../ui/components.js';

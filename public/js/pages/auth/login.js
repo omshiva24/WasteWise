@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Sign in with a mobile number (OTP), email + password, or Google.
 import { h, icon, s } from '../../ui/dom.js';
 import { logo } from '../../ui/art.js';
@@ -7,6 +8,14 @@ import { haptic } from '../../ui/fx.js';
 import { isNative, platform } from '../../ui/native.js';
 import { APP } from '../../config.js';
 import { fmtPhone } from '../../core/format.js';
+
+/** Ownership line shown under every sign-in screen. */
+export function ownerFooter() {
+  return h('footer', { class: 'credit owner' },
+    h('div', h('b', `© ${APP.year} ${APP.author}`), ' · All rights reserved'),
+    h('div', `${APP.authorTitle}, ${APP.authorPlace}`),
+    h('a', { href: '#/about' }, icon('info', { size: 14 }), 'Why I built WasteWise · Copyright'));
+}
 
 export function authHero(title, text) {
   return h('div', { class: 'auth-hero' },
@@ -255,6 +264,6 @@ export default function login() {
         host,
         h('div', { style: { marginTop: '12px' } }, errBox),
         googleBlock(showError)),
-      h('footer', { class: 'credit' }, `${APP.name} v${APP.version} · Built by ${APP.author}`)));
+      ownerFooter()));
   return { el, fullscreen: true, destroy: () => phone?.destroy?.() };
 }

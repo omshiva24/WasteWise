@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Layer 1 - Authentication: phone OTP, email + password, Google, profile, sign out.
 import { getBackend } from './index.js';
 

@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Animated SVG / CSS charts: donut, horizontal bars, columns, area lines, leaderboard.
 
 import { h, s } from './dom.js';

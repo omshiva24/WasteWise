@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Handover sheet: supervisor confirms the weight handed to the vendor and rates the pickup.
 import { h, icon } from '../../ui/dom.js';
 import { sheet, btn, stars, setBusy, toast } from '../../ui/components.js';

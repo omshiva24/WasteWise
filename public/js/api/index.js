@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Data-access entry point. WasteWise runs on Firebase (Auth + Firestore):
 // real accounts and live data shared by every phone and browser.
 // Pages only talk to the services in this folder, never to Firebase directly.

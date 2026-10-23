@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // First sign-in: finish the profile (name, contact number, role request).
 // The very first account becomes the Admin, who then approves supervisors and vendors.
 import { h, icon } from '../../ui/dom.js';
@@ -6,7 +7,7 @@ import { authService } from '../../api/auth.service.js';
 import { ROLE_META } from '../../core/constants.js';
 import { state } from '../../ui/state.js';
 import { haptic, confetti } from '../../ui/fx.js';
-import { authHero } from './login.js';
+import { authHero, ownerFooter } from './login.js';
 import { fmtPhone } from '../../core/format.js';
 
 /** Member / Supervisor / Vendor picker (+ company name for vendors). */
@@ -82,6 +83,6 @@ export default function setup() {
     h('div', { class: 'auth-body' }, h('div', { class: 'auth-card' },
       h('h2', { style: { fontSize: '1.35rem' } }, 'Set up your profile'),
       signedInAs ? h('p', { class: 'muted small', style: { margin: '4px 0 16px' } }, 'Signed in as ', h('b', signedInAs)) : null,
-      form)));
+      form), ownerFooter()));
   return { el, fullscreen: true };
 }

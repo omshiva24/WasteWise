@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Minimal DOM builder. User text always goes through textContent (no HTML injection).
 
 import { ICONS } from '../vendor/icons.js';

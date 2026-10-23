@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Bridge to native features when running inside the Capacitor Android / iOS app.
 // The Capacitor native bridge injects window.Capacitor; plugins are called through it,
 // so the web build needs no bundler. In a normal browser every call falls back gracefully.

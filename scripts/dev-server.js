@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Zero-dependency static server for local development: node scripts/dev-server.js [port]
 import http from 'node:http';
 import { readFile, stat } from 'node:fs/promises';

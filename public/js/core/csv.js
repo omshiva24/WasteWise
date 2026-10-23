@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // CSV export of requests (opens cleanly in Excel / Google Sheets).
 
 import { WASTE_BY_ID } from './constants.js';

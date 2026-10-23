@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // WasteWise - boot sequence.  (c) P Om Shiva
 
 import { initBackend } from './api/index.js';
@@ -112,5 +113,12 @@ addEventListener('beforeinstallprompt', (e) => {
 });
 addEventListener('offline', () => toast("You're offline - changes will sync when you're back", 'info'));
 addEventListener('online', () => toast('Back online', 'success', 1800));
+
+// A note for anyone opening the browser's developer tools.
+console.log(
+  '%cWasteWise%c\n© 2026 P Om Shiva - M.Tech CSE (2nd year), Pondicherry University. All rights reserved.\nCopying or re-using this code, design or idea without written permission is not allowed.',
+  'font: 700 20px Poppins, sans-serif; color: #059669',
+  'font: 13px Inter, sans-serif; color: #b91c1c',
+);
 
 boot();

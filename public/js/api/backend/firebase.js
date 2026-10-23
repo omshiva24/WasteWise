@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Firebase backend (Auth + Firestore) loaded from Google's CDN.
 // Real accounts (phone OTP, email + password, Google) and live data shared by
 // every phone and browser. Firestore security rules (firestore.rules) enforce

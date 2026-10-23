@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Request detail: animated timeline, info, photo, history and role-based actions.
 import { h, icon } from '../../ui/dom.js';
 import { btn, chip, statusChip, wasteBubble, swipeToAccept, confirmSheet, stars, toast, empty, skeletonList, banner } from '../../ui/components.js';

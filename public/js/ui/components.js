@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Reusable UI components.
 
 import { h, icon, indexChildren, svgMarkup } from './dom.js';

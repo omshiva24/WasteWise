@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // WasteWise service worker: works offline, but always prefers the freshest app files.
 // Network-first for everything on this site (falls back to the cache when offline).
 const VERSION = 'wastewise-v2.0.0';

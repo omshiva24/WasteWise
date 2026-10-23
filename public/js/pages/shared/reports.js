@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Reports (admin: everything, supervisor: own requests) - PDF report and CSV export.
 import { h, icon } from '../../ui/dom.js';
 import { btn, segmented, toast, setBusy } from '../../ui/components.js';

@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Device location (GPS) on phones and browsers, plus address lookup on OpenStreetMap (Nominatim).
 
 import { isNative, nativeCall } from './native.js';
@@ -125,14 +126,15 @@ let queue = Promise.resolve();
 let lastCall = 0;
 function throttled(url) {
   if (cache.has(url)) return cache.get(url);
-  const p = (queue = queue.then(async () => {
+  const p = queue.then(async () => {
     const wait = Math.max(0, 1100 - (Date.now() - lastCall));
     if (wait) await new Promise((r) => setTimeout(r, wait));
     lastCall = Date.now();
     const res = await fetch(url, { headers: { Accept: 'application/json' } });
     if (!res.ok) throw new Error(`Address lookup failed (${res.status})`);
     return res.json();
-  }));
+  });
+  queue = p.catch(() => {}); // one failed lookup must not block the next ones
   p.catch(() => cache.delete(url));
   cache.set(url, p);
   return p;

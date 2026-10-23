@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // QR codes: render bin labels (qrcodegen, MIT) and scan them with the camera
 // (native BarcodeDetector where available, otherwise jsQR, Apache-2.0).
 

@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Live map: pickups and bins on a real map, with the person's own GPS position.
 import { h, icon } from '../../ui/dom.js';
 import { statusChip, toast, btn } from '../../ui/components.js';

@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Admin: registered bins with map locations and QR codes, add / edit bins, printable QR stickers (PDF).
 import { h, icon } from '../../ui/dom.js';
 import { btn, field, inputBox, selectBox, sheet, toast, confirmSheet, empty, skeletonList, setBusy } from '../../ui/components.js';

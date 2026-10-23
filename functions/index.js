@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // WasteWise Cloud Functions (OPTIONAL - needs the Firebase Blaze plan; the app works without them).
 //  - pushOnNotification: sends every in-app notification to the person's phone (FCM push)
 //  - alertVendorsOnNewRequest: tells every vendor when a new pickup is raised

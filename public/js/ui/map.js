@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Live maps (Leaflet + OpenStreetMap tiles): pins, "you are here", mini maps
 // and a full-screen location picker with GPS, search and a draggable map.
 

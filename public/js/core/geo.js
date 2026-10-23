@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Pure location helpers (no browser APIs): validation, distance, formatting, map links.
 
 const round = (n, d = 6) => Math.round(n * 10 ** d) / 10 ** d;

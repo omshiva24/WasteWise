@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Admin: every request with status / type filters and search.
 import { h } from '../../ui/dom.js';
 import { segmented, requestList, empty, skeletonList, inputBox, selectBox, btn } from '../../ui/components.js';

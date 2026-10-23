@@ -169,6 +169,13 @@ try {
   await page.waitForSelector('.auth-card');
   await settle(page);
   await shot(page, '02-login-phone');
+  assert.match(await page.locator('footer.credit.owner').innerText(), /P Om Shiva[\s\S]*Pondicherry University/);
+  await page.click('footer.credit.owner a[href="#/about"]');
+  await page.waitForSelector('.about-card.why');
+  await settle(page, 900);
+  await page.screenshot({ path: `${SHOTS}02b-about.png`, fullPage: true });
+  await page.click('.about .btn.primary:has-text("Get started")');
+  await page.waitForSelector('.auth-card');
   log(`onboarding -> sign-in screen (${MODE} backend)`);
 
   // ---- the first account becomes the admin (phone OTP)
@@ -187,6 +194,7 @@ try {
   await page.goto(`${BASE}#/admin/bins`);
   await page.click('.btn:has-text("Add bin")');
   await page.fill('input[placeholder="BIN-A05"]', 'BIN-L01');
+  await settle(page, 700); // let the sheet finish sliding up
   await page.click('.sheet .btn:has-text("Use my location")');
   await page.waitForSelector('.sheet .geo-info');
   assert.equal(await page.inputValue('input[placeholder="e.g. Library Block - Entrance"]'), 'Central Library, Library Road, Kalapet');

@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Take a photo of the bin: native camera in the Android / iOS app, file picker
 // with camera capture in browsers. Images are resized and compressed to JPEG.
 

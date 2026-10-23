@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Shared domain constants: roles, statuses, waste types.
 
 export const DAY = 86_400_000;

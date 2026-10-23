@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Admin: approve access requests, change roles, activate / deactivate accounts.
 import { h, icon } from '../../ui/dom.js';
 import { avatar, btn, chip, segmented, sheet, toggle, toast, empty, skeletonList, sectionTitle, inputBox } from '../../ui/components.js';

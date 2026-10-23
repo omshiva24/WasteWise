@@ -1,8 +1,9 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Create an account with email + password. (Phone and Google accounts are created on first sign-in.)
 import { h, icon } from '../../ui/dom.js';
 import { btn, field, inputBox, setBusy } from '../../ui/components.js';
 import { authService } from '../../api/auth.service.js';
-import { authHero, googleBlock } from './login.js';
+import { authHero, googleBlock, ownerFooter } from './login.js';
 import { roleChooser } from './setup.js';
 import { haptic } from '../../ui/fx.js';
 
@@ -41,6 +42,6 @@ export default function signup() {
       h('h2', { style: { fontSize: '1.35rem', marginBottom: '14px' } }, 'Create your account'),
       form,
       googleBlock(showError),
-      h('p', { class: 'small', style: { textAlign: 'center', marginTop: '14px' } }, 'Have an account, or prefer your mobile number? ', h('a', { href: '#/login' }, 'Sign in')))));
+      h('p', { class: 'small', style: { textAlign: 'center', marginTop: '14px' } }, 'Have an account, or prefer your mobile number? ', h('a', { href: '#/login' }, 'Sign in'))), ownerFooter()));
   return { el, fullscreen: true };
 }

@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Small global app state + saved preferences.
 
 const PREFS = 'wastewise.prefs';

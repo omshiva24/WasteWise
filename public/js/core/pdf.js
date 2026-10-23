@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Tiny dependency-free PDF writer (A4, Helvetica / Helvetica-Bold, text, rectangles,
 // lines, circles). Enough for clean, multi-page reports with tables and bar charts.
 

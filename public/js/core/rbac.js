@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Role-based access control: what each role may do and which screens it may open.
 
 import { ROLE_META } from './constants.js';
@@ -23,6 +24,8 @@ export const ROUTE_ROLES = {
 };
 
 export const PUBLIC_ROUTES = ['/welcome', '/login', '/signup'];
+/** Pages anyone can open, signed in or not. */
+export const OPEN_ROUTES = ['/about'];
 
 export function can(user, permission) {
   if (!user || user.active === false) return false;
@@ -37,6 +40,7 @@ export function homeFor(user) {
 
 /** Returns null when allowed, otherwise the path to redirect to. */
 export function guard(user, path) {
+  if (OPEN_ROUTES.includes(path)) return null;
   const isPublic = PUBLIC_ROUTES.some((p) => path === p || path.startsWith(p + '/'));
   if (!user) return isPublic ? null : '/login';
   // Signed in for the first time: finish the profile before anything else.

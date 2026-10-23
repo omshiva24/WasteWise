@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Formatting helpers (Indian locale).
 
 import { DAY, HOUR } from './constants.js';

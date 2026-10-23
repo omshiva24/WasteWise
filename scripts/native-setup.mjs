@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Adds camera, photo, location and notification permissions to the generated native projects.
 // Run after `npx cap add android` / `npx cap add ios`:  node scripts/native-setup.mjs [android|ios|all]
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';

@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // WasteWise configuration.
 //
 // FIREBASE_CONFIG: your Firebase web app config (Firebase console -> Project
@@ -41,6 +42,9 @@ export const APP = {
   name: 'WasteWise',
   version: '2.0.0',
   author: 'P Om Shiva',
+  authorTitle: 'M.Tech CSE (2nd year)',
+  authorPlace: 'Pondicherry University',
+  year: 2026,
   authorUrl: 'https://github.com/omshiva24',
   repoUrl: 'https://github.com/omshiva24/WasteWise',
   liveUrl: 'https://wastewise-six-indol.vercel.app',

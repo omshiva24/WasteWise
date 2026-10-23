@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Motion helpers: counters, ripples, confetti, haptics, view transitions.
 
 import { isNative, nativeCall } from './native.js';

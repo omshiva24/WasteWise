@@ -15,6 +15,18 @@ One codebase runs as a **website**, an **installable app (PWA)** on any phone, a
 **Created by:** **P Om Shiva**, M.Tech CSE (2nd year), Pondicherry University · [GitHub @omshiva24](https://github.com/omshiva24)
 **© 2026 P Om Shiva. All rights reserved.** See [LICENSE](LICENSE).
 
+> ⚠️ **WasteWise is the original work of P Om Shiva (M.Tech CSE, 2nd year, Pondicherry University).** Its idea, name, design, screens and code may not be copied, re-used or presented as anyone else's work - including as a college project, hackathon or competition entry, app or product - without his written permission. To use WasteWise for your campus or city, [contact the author](https://github.com/omshiva24).
+
+## Why I built WasteWise
+
+Overflowing bins. Pickups that nobody tracks. Waste that disappears without anyone knowing how much was collected, or by whom. I saw this problem around our campuses and cities - and I refused to accept that it has to be this way.
+
+So I built WasteWise: one app where a supervisor raises a pickup at the exact GPS spot in seconds, the nearest vendor sees it live, and every single kilo is weighed, recorded and counted. Cleanliness should not depend on luck. It should be a system that everyone can trust and check.
+
+This is not just a college assignment. It is my answer to a real problem - so that every campus and every city ward can stay clean, and every person who keeps it clean gets the credit they deserve.
+
+**- P Om Shiva**, M.Tech CSE (2nd year), Pondicherry University
+
 ---
 
 ## Screenshots

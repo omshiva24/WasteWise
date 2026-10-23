@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Builds the WasteWise PDF report (KPIs, charts, vendor table, overdue list, all requests).
 
 import { PdfDoc, fitText } from './pdf.js';
@@ -19,7 +20,7 @@ export function buildReport({ requests, periodLabel, generatedBy, scopeLabel = '
 
   const footer = () => {
     doc.line(M, doc.H - 34, doc.W - M, doc.H - 34, { color: C.line });
-    doc.text(M, doc.H - 28, 'WasteWise - smart waste pickups', { size: 8, color: C.mute });
+    doc.text(M, doc.H - 28, 'WasteWise (c) 2026 P Om Shiva, M.Tech CSE, Pondicherry University - all rights reserved', { size: 8, color: C.mute });
     doc.text(doc.W - M, doc.H - 28, `Page ${page}`, { size: 8, color: C.mute, align: 'right' });
   };
   const newPage = () => {

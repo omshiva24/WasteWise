@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Hash router with role guards and animated page changes.
 // Hash URLs work everywhere: static hosting, Firebase Hosting and inside the native app.
 
@@ -10,6 +11,7 @@ const ROUTES = [
   ['/login', () => import('../pages/auth/login.js')],
   ['/signup', () => import('../pages/auth/signup.js')],
   ['/setup', () => import('../pages/auth/setup.js')],
+  ['/about', () => import('../pages/auth/about.js')],
   ['/map', () => import('../pages/shared/map.js')],
   ['/supervisor', () => import('../pages/supervisor/home.js')],
   ['/supervisor/requests', () => import('../pages/supervisor/requests.js')],

@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Profile & settings: edit details, theme, haptics, install app, data mode, about, sign out.
 import { h, icon } from '../../ui/dom.js';
 import { avatar, btn, chip, banner, field, inputBox, sheet, toggle, toast, confirmSheet, setBusy } from '../../ui/components.js';
@@ -92,8 +93,10 @@ export default function me({ navigate }) {
   const about = h('section', { class: 'card', style: { textAlign: 'center' } },
     h('div', { style: { width: '64px', margin: '0 auto 6px' } }, logo({ size: 64 })),
     h('h3', { style: { fontSize: '1.1rem' } }, `${APP.name} v${APP.version}`),
-    h('p', { class: 'muted small', style: { margin: '4px 0 10px' } }, `Designed & built by ${APP.author} · ${isNative() ? `${platform()} app` : 'web app'}`),
-    h('div', { class: 'row', style: { justifyContent: 'center' } }, h('a', { href: APP.repoUrl, target: '_blank', rel: 'noopener', class: 'btn ghost sm' }, icon('route', { size: 16 }), 'Source on GitHub')));
+    h('p', { class: 'small', style: { margin: '6px 0 2px', fontWeight: '700' } }, `Created by ${APP.author}`),
+    h('p', { class: 'muted small', style: { margin: '0 0 4px' } }, `${APP.authorTitle} · ${APP.authorPlace}`),
+    h('p', { class: 'muted small', style: { margin: '0 0 12px' } }, `© ${APP.year} ${APP.author}. All rights reserved. · ${isNative() ? `${platform()} app` : 'web app'}`),
+    h('div', { class: 'row', style: { justifyContent: 'center' } }, btn('Why I built WasteWise', { kind: 'soft', size: 'sm', iconName: 'info', onClick: () => navigate('/about') })));
 
   const out = btn('Sign out', { kind: 'danger', size: 'lg', block: true, iconName: 'log-out', cls: 'signout', onClick: async () => {
     if (!(await confirmSheet({ title: 'Sign out?', text: 'You can sign back in any time.', confirmLabel: 'Sign out', kind: 'danger', iconName: 'log-out' }))) return;

@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Printable PDF of bin QR stickers (3 x 4 per A4 page).
 
 import qrcodegen from '../vendor/qrcodegen.js';
@@ -10,7 +11,7 @@ export function qrMatrix(text) {
 }
 
 export function buildBinLabels(bins) {
-  const doc = new PdfDoc({ title: 'WasteWise bin QR labels', author: 'WasteWise' });
+  const doc = new PdfDoc({ title: 'WasteWise bin QR labels', author: 'P Om Shiva' });
   const cols = 3;
   const rows = 4;
   const M = 30;

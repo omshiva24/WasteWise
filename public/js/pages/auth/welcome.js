@@ -1,8 +1,10 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // First-launch onboarding carousel.
 import { h, svgMarkup } from '../../ui/dom.js';
 import { ART } from '../../ui/art.js';
 import { btn } from '../../ui/components.js';
 import { haptic } from '../../ui/fx.js';
+import { APP } from '../../config.js';
 
 const SLIDES = [
   { art: 'onboard1', title: 'Raise a pickup in seconds', text: 'Scan the bin QR, pick the waste type, snap a photo - your request goes straight to registered vendors.' },
@@ -47,5 +49,5 @@ export default function welcome({ navigate }) {
     if (dx > 50 && i > 0) (i -= 1), show();
   });
   show();
-  return { fullscreen: true, el: h('div', { class: 'onb' }, slideHost, h('div', { class: 'foot' }, dots, next, skip)) };
+  return { fullscreen: true, el: h('div', { class: 'onb' }, slideHost, h('div', { class: 'foot' }, dots, next, skip, h('a', { class: 'onb-owner', href: '#/about' }, `Created by ${APP.author} · ${APP.authorTitle}, ${APP.authorPlace}`))) };
 }

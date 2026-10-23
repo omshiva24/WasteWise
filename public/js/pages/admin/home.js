@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Admin dashboard: KPIs, charts, overdue list, vendor leaderboard, pending approvals.
 import { h, svgMarkup, icon } from '../../ui/dom.js';
 import { toast } from '../../ui/components.js';

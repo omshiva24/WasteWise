@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // App shell: top bar, role-based bottom tabs (phones) / side navigation (desktop).
 
 import { h, icon, replace } from './dom.js';
@@ -72,7 +73,7 @@ function buildShell(role) {
   const tabbar = h('nav', { class: 'tabbar', 'aria-label': 'Main' }, pill, tabBtns);
   const sideBtns = side.map((t) => h('button', { type: 'button', class: 'side-link', dataset: { path: t.path }, onclick: () => navigate(t.path) }, icon(t.icon, { size: 20 }), t.label));
   const raise = role === 'supervisor' ? h('button', { type: 'button', class: 'btn primary', style: { margin: '6px 0 12px' }, onclick: () => navigate('/supervisor/new') }, icon('plus', { size: 18 }), 'Raise pickup') : null;
-  const sidenav = h('aside', { class: 'sidenav', 'aria-label': 'Sections' }, h('div', { class: 'brand-mini' }, logo({ size: 34 }), 'WasteWise'), raise, sideBtns, h('div', { class: 'side-foot' }, `v${APP.version} · Built by ${APP.author}`));
+  const sidenav = h('aside', { class: 'sidenav', 'aria-label': 'Sections' }, h('div', { class: 'brand-mini' }, logo({ size: 34 }), 'WasteWise'), raise, sideBtns, h('a', { class: 'side-foot', href: '#/about' }, h('b', `© ${APP.year} ${APP.author}`), h('br'), `${APP.authorTitle}, ${APP.authorPlace}`, h('br'), `v${APP.version} · All rights reserved`));
   const shell = h('div', { class: 'shell has-nav' }, sidenav, h('div', { class: 'col' }, topbar, view), tabbar);
   return { shell, titleH, sub, backBtn, brand, badge, bell, me, view, tabBtns, sideBtns, pill, tabs };
 }

@@ -1,3 +1,4 @@
+// WasteWise (c) 2026 P Om Shiva - M.Tech CSE, Pondicherry University. All rights reserved. Do not copy without written permission.
 // Supervisor home: hero, live KPIs, overdue alert, handovers waiting, recent requests.
 import { h, icon, svgMarkup } from '../../ui/dom.js';
 import { ART } from '../../ui/art.js';
