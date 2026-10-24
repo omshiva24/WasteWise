@@ -19,3 +19,5 @@ GoogleService-Info.plist
 # test screenshots (compressed .jpg copies are committed)
 docs/screenshots/*.png
 docs/live-check/
+
+demo-video/

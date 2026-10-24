@@ -1,0 +1,37 @@
+name: Demo video clips
+
+# Records the app in action for the YouTube demo (sample data, offline Firebase stand-in,
+# real map tiles) and publishes the clips to the "demo-video" pre-release.
+on:
+  push:
+    branches: [main]
+    paths: ['scripts/record-demo.mjs', '.github/workflows/demo-video.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  record:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install ffmpeg and Playwright
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-color-emoji
+          npm install -g playwright@1.56.1
+          npx -y playwright@1.56.1 install --with-deps chromium
+      - name: Record the clips
+        run: PW_PATH="$(npm root -g)/" node scripts/record-demo.mjs
+      - name: Publish clips
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd demo-video && ls
+          gh release view demo-video --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || gh release create demo-video --repo "$GITHUB_REPOSITORY" --prerelease --title "Demo video clips" --notes "Screen recordings of WasteWise used for the YouTube demo video."
+          gh release upload demo-video --repo "$GITHUB_REPOSITORY" --clobber *.mp4 *.png manifest.json
