@@ -12,6 +12,7 @@ const ROUTES = [
   ['/signup', () => import('../pages/auth/signup.js')],
   ['/setup', () => import('../pages/auth/setup.js')],
   ['/about', () => import('../pages/auth/about.js')],
+  ['/get', () => import('../pages/auth/get.js')],
   ['/map', () => import('../pages/shared/map.js')],
   ['/supervisor', () => import('../pages/supervisor/home.js')],
   ['/supervisor/requests', () => import('../pages/supervisor/requests.js')],

@@ -25,7 +25,7 @@ export const ROUTE_ROLES = {
 
 export const PUBLIC_ROUTES = ['/welcome', '/login', '/signup'];
 /** Pages anyone can open, signed in or not. */
-export const OPEN_ROUTES = ['/about'];
+export const OPEN_ROUTES = ['/about', '/get'];
 
 export function can(user, permission) {
   if (!user || user.active === false) return false;

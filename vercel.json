@@ -52,5 +52,22 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/get",
+      "destination": "/#/get",
+      "permanent": false
+    },
+    {
+      "source": "/download",
+      "destination": "/#/get",
+      "permanent": false
+    },
+    {
+      "source": "/about",
+      "destination": "/#/about",
+      "permanent": false
+    }
   ]
 }

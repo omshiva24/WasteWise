@@ -779,7 +779,8 @@ footer.credit.owner a { display: inline-flex; align-items: center; justify-conte
 a.side-foot { color: var(--mute); text-decoration: none; line-height: 1.5; }
 a.side-foot b { color: var(--ink-2); }
 .onb-owner { display: block; text-align: center; font-size: 0.74rem; color: var(--mute); text-decoration: none; margin-top: 6px; }
-.about .auth-hero { padding-top: calc(var(--safe-t) + 64px); padding-bottom: 96px; }
+.about .auth-hero, .get .auth-hero { padding-top: calc(var(--safe-t) + 64px); padding-bottom: 96px; }
+.get .auth-hero { padding-bottom: 70px; }
 .about-back { position: absolute; z-index: 2; top: calc(var(--safe-t) + 14px); left: 14px; width: 42px; height: 42px; border-radius: 14px; border: 0; background: rgba(255, 255, 255, 0.16); color: #fff; display: grid; place-items: center; cursor: pointer; }
 .about-card { background: var(--surface); border: 1px solid var(--line); border-radius: 26px; padding: 22px 20px; box-shadow: var(--shadow); display: grid; gap: 10px; animation: fadeUp 0.6s var(--ease) both; }
 .about-card.creator { justify-items: center; text-align: center; box-shadow: var(--shadow-lg); }
@@ -797,3 +798,28 @@ a.side-foot b { color: var(--ink-2); }
 .about-card.rights .card-title .i { color: var(--red); }
 .about-card.rights .warn { font-weight: 700; color: #b91c1c; background: var(--red-bg); padding: 10px 12px; border-radius: 14px; }
 [data-theme='dark'] .about-card.rights .warn { color: #fca5a5; background: color-mix(in srgb, var(--red) 18%, transparent); }
+
+/* ---------------------------------------------------------------- get the app */
+.get .auth-body { padding-bottom: 120px; }
+.get-card { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 26px; padding: 20px 18px; box-shadow: var(--shadow); display: grid; gap: 14px; animation: fadeUp 0.6s var(--ease) both; }
+.get-card.mine { border: 2px solid var(--brand); box-shadow: var(--shadow-lg); }
+.get-card + .get-card { animation-delay: 0.1s; }
+.get-tag { position: absolute; top: -12px; right: 18px; background: linear-gradient(135deg, #10b981, #047857); color: #fff; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em; padding: 4px 10px; border-radius: 99px; box-shadow: var(--shadow); }
+.get-head { display: flex; align-items: center; gap: 12px; }
+.get-head h2 { font-size: 1.3rem; }
+.get-os { width: 50px; height: 50px; border-radius: 16px; display: grid; place-items: center; color: #fff; flex: none; }
+.get-os.android { background: linear-gradient(135deg, #34d399, #059669); }
+.get-os.ios { background: linear-gradient(135deg, #38bdf8, #0369a1); }
+.get-os.pc { background: linear-gradient(135deg, #a78bfa, #6d28d9); }
+.get-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.get-step { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 16px; background: var(--surface-2); border: 1px solid var(--line); animation: fadeUp 0.5s var(--ease) both; animation-delay: calc(0.15s + var(--i) * 0.08s); }
+.get-n { width: 24px; height: 24px; border-radius: 8px; flex: none; display: grid; place-items: center; font-weight: 800; font-size: 0.8rem; color: #fff; background: var(--brand-600); }
+.get-ic { width: 36px; height: 36px; border-radius: 12px; flex: none; display: grid; place-items: center; color: var(--sky); background: var(--sky-bg); }
+[data-theme='dark'] .get-ic { background: color-mix(in srgb, var(--sky) 18%, transparent); }
+.get-note { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 16px; background: var(--amber-bg); color: #92400e; }
+[data-theme='dark'] .get-note { background: color-mix(in srgb, var(--amber) 18%, transparent); color: #fcd34d; }
+.get-note > div { flex: 1; }
+.get-qr { width: 200px; margin: 0 auto; padding: 12px; background: #fff; border-radius: 20px; box-shadow: var(--shadow); }
+.get-qr svg { display: block; width: 100%; height: auto; }
+.share-hint { position: fixed; z-index: 90; left: 50%; bottom: calc(var(--safe-b) + 10px); transform: translateX(-50%); display: grid; justify-items: center; gap: 2px; padding: 8px 14px 4px; border-radius: 16px; background: var(--ink); color: var(--surface); font-weight: 800; font-size: 0.82rem; box-shadow: var(--shadow-lg); animation: hintBob 1.4s ease-in-out infinite; pointer-events: none; }
+@keyframes hintBob { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 6px); } }

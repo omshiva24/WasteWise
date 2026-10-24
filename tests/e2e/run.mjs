@@ -176,6 +176,13 @@ try {
   await page.screenshot({ path: `${SHOTS}02b-about.png`, fullPage: true });
   await page.click('.about .btn.primary:has-text("Get started")');
   await page.waitForSelector('.auth-card');
+  await page.click('footer.credit.owner a[href="#/get"]');
+  await page.waitForSelector('.get-card a[href$="WasteWise.apk"]');
+  assert.ok((await page.locator('.get-card').count()) >= 2);
+  await settle(page, 800);
+  await shot(page, '02c-get-app');
+  await page.goto(`${BASE}#/login`);
+  await page.waitForSelector('.auth-card');
   log(`onboarding -> sign-in screen (${MODE} backend)`);
 
   // ---- the first account becomes the admin (phone OTP)

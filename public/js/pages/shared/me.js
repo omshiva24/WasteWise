@@ -73,7 +73,7 @@ export default function me({ navigate }) {
         globalThis.__installPrompt = null;
       })
     : !isNative() && /iphone|ipad/i.test(navigator.userAgent)
-      ? srow('smartphone', 'emerald', 'Install on iPhone', 'Tap Share, then "Add to Home Screen"')
+      ? (navigator.standalone ? null : srow('smartphone', 'emerald', 'Install on iPhone', 'Tap Share, then "Add to Home Screen" - see how', null, () => navigate('/get')))
       : null;
 
   const settings = h('section', { class: 'card settings' },
@@ -84,7 +84,7 @@ export default function me({ navigate }) {
     u.role === 'admin' ? srow('activity', 'slate', 'Audit log', 'Every action, with time and person', null, () => navigate('/admin/logs')) : null,
     u.role !== 'member' ? srow('chart-pie', 'emerald', 'Community impact', 'Live recycling stats', null, () => navigate('/member')) : null,
     install,
-    !isNative() ? h('a', { class: 'srow', href: APP.apkUrl, target: '_blank', rel: 'noopener', style: { color: 'inherit' } }, h('div', { class: 'sic bg-emerald' }, icon('smartphone', { size: 19 })), h('div', { class: 'grow' }, h('div', { class: 'st' }, 'Android app'), h('div', { class: 'sd' }, 'Download the APK and install it on your phone')), icon('download', { size: 18 })) : null);
+    !isNative() ? srow('download', 'emerald', 'Get the app', 'Android and iPhone - share the link with your team', null, () => navigate('/get')) : null);
 
   const modeCard = h('section', { class: 'card settings' },
     srow('shield-check', 'emerald', 'Live & secure', 'Your data syncs instantly across every phone and browser you sign in on'),

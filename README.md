@@ -11,7 +11,8 @@ Real accounts for everyone: sign in with a **mobile number (OTP)**, **email + pa
 One codebase runs as a **website**, an **installable app (PWA)** on any phone, and native **Android** and **iOS** apps (Capacitor).
 
 **Live app:** https://wastewise-six-indol.vercel.app
-**Android APK:** [Download the latest build](https://github.com/omshiva24/WasteWise/releases/tag/android-latest)
+**Get the app (Android & iPhone):** https://wastewise-six-indol.vercel.app/get
+**Android APK:** [Download the latest build](https://github.com/omshiva24/WasteWise/releases/download/android-latest/WasteWise.apk) · **iPhone / iPad:** open the link in Safari → Share → **Add to Home Screen**
 **Created by:** **P Om Shiva**, M.Tech CSE (2nd year), Pondicherry University · [GitHub @omshiva24](https://github.com/omshiva24)
 **© 2026 P Om Shiva. All rights reserved.** See [LICENSE](LICENSE).
 
@@ -143,7 +144,8 @@ GitHub Actions builds the native apps on every push to `main`:
 
 - **Android:** an installable APK is published to the [android-latest release](https://github.com/omshiva24/WasteWise/releases/tag/android-latest). Download it on your phone and open it.
 - **iOS:** the app is compiled for the iOS Simulator to prove the build works. Installing on a real iPhone or publishing to the App Store needs an Apple Developer account: on a Mac run `npm install && npx cap add ios && node scripts/native-setup.mjs ios && npx cap open ios`, then press Run in Xcode.
-- **Any phone right now:** open the live app and choose **Install** (Android/Chrome) or **Share → Add to Home Screen** (iPhone/Safari).
+- **iPhone / iPad today:** open https://wastewise-six-indol.vercel.app/get in Safari → **Share → Add to Home Screen**. WasteWise installs with its own icon and launch screen and opens full-screen with GPS, camera, maps and sign-in (Google sign-in is offered in Safari; inside the Home Screen app use mobile OTP or email).
+- **App Store / TestFlight:** Apple only allows iPhone apps from the App Store or TestFlight, which needs an Apple Developer account (paid yearly). The iOS project already builds in CI; with an account it can be signed and uploaded to TestFlight.
 
 Native features: GPS location, camera for bin photos, QR scanning, haptics, status bar and splash screen, hardware back button, push notifications (optional, with Cloud Functions). Phone OTP sign-in works in the Android app and the website; Google sign-in works on the website.
 
